@@ -212,8 +212,6 @@ Widget customContainer() {
                         backgroundColor: ColorHelper.secondaryOrangeColor),
                     onPressed: () {
                       FocusManager.instance.primaryFocus?.unfocus();
-
-
                     },
                     child: Text(
                       'Create Account',
