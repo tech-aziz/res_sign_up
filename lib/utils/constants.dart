@@ -4,5 +4,5 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Constants{
   //FONT SIZES
     static double largeFontSizeCreateAccount =
-      ScreenUtil().orientation == Orientation.portrait ? 14.sp : 12.sp;
+      ScreenUtil().orientation == Orientation.portrait ? 11.sp : 8.sp;
 }

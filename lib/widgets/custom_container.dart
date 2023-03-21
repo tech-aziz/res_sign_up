@@ -11,8 +11,10 @@ Widget customContainer() {
   TextEditingController _companyAddressTextController = TextEditingController();
   TextEditingController _companyPhoneTextController = TextEditingController();
   TextEditingController _companyEmailTextController = TextEditingController();
-  TextEditingController _companyPasswordTextController =TextEditingController();
-  TextEditingController _companyConfirmPasswordTextController = TextEditingController();
+  TextEditingController _companyPasswordTextController =
+      TextEditingController();
+  TextEditingController _companyConfirmPasswordTextController =
+      TextEditingController();
 
   return Padding(
     padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 80),
@@ -33,201 +35,223 @@ Widget customContainer() {
               ),
             ],
           ),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 70,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: TextField(
-                          controller: _companyNameTextController,
-                          keyboardType: TextInputType.name,
-                          // maxLength: 30,
-                          decoration: InputDecoration(
-                            labelText: 'Restaurant Name',
-                            prefixIcon: const Icon(Icons.keyboard),
-                            enabledBorder: Style.inputBorder(),
-                            focusedBorder: Style.focusBorder(),
-                          ),
-                          style: Style.largeInputText(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: TextField(
-                          controller: _companyAddressTextController,
-                          keyboardType: TextInputType.streetAddress,
-                          // maxLength: 160,
-                          minLines: 1,
-                          maxLines: 2,
-                          decoration: InputDecoration(
-                            labelText: 'Address',
-                            prefixIcon: const Icon(Icons.location_on),
-                            enabledBorder: Style.inputBorder(),
-                            focusedBorder: Style.focusBorder(),
-                          ),
-                          style: Style.largeInputText(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: TextField(
-                          controller: _companyPhoneTextController,
-                          keyboardType: TextInputType.phone,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
+          child: Column(
+            children: [
+              SizedBox(
+                height: ScreenUtil().orientation == Orientation.portrait
+                    ? AppServices.getDeviceType() == DeviceType.phone
+                        ? 500.h
+                        : 600.h
+                    : 370.h,
+
+
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  child: Padding(
+                    padding: EdgeInsets.only(top: customPaddingSize()),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 32),
+                                child: TextField(
+                                  controller: _companyNameTextController,
+                                  keyboardType: TextInputType.name,
+                                  // maxLength: 30,
+                                  decoration: InputDecoration(
+                                    labelText: 'Restaurant Name',
+                                    prefixIcon: const Icon(Icons.keyboard),
+                                    enabledBorder: Style.inputBorder(),
+                                    focusedBorder: Style.focusBorder(),
+                                  ),
+                                  style: Style.largeInputText(),
+                                ),
+                              ),
+                            ),
                           ],
-                          // maxLength: 11,
-                          decoration: InputDecoration(
-                            labelText: 'Phone Number',
-                            prefixIcon: const Icon(Icons.phone),
-                            enabledBorder: Style.inputBorder(),
-                            focusedBorder: Style.focusBorder(),
-                          ),
-                          style: Style.largeInputText(),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: TextField(
-                          controller: _companyEmailTextController,
-                          keyboardType: TextInputType.emailAddress,
-                          // maxLength: 50,
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            prefixIcon: const Icon(Icons.mail),
-                            enabledBorder: Style.inputBorder(),
-                            focusedBorder: Style.focusBorder(),
-                          ),
-                          style: Style.largeInputText(),
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: TextField(
-                          controller: _companyPasswordTextController,
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: true,
-                          // maxLength: 50,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            prefixIcon: const Icon(Icons.lock),
-                            enabledBorder: Style.inputBorder(),
-                            focusedBorder: Style.focusBorder(),
-                          ),
-                          style: Style.largeInputText(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 32),
+                                child: TextField(
+                                  controller: _companyAddressTextController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  // maxLength: 160,
+                                  minLines: 1,
+                                  maxLines: 2,
+                                  decoration: InputDecoration(
+                                    labelText: 'Address',
+                                    prefixIcon: const Icon(Icons.location_on),
+                                    enabledBorder: Style.inputBorder(),
+                                    focusedBorder: Style.focusBorder(),
+                                  ),
+                                  style: Style.largeInputText(),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: TextField(
-                          controller: _companyConfirmPasswordTextController,
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: true,
-                          // maxLength: 50,
-                          decoration: InputDecoration(
-                            labelText: 'Confirm Password',
-                            prefixIcon: const Icon(Icons.lock),
-                            enabledBorder: Style.inputBorder(),
-                            focusedBorder: Style.focusBorder(),
-                          ),
-                          style: Style.largeInputText(),
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: ScreenUtil().orientation == Orientation.landscape
-                      ? AppServices.getDeviceType() == DeviceType.phone
-                          ? 40
-                          : 80.h
-                      : 40.h,
-                  width: ScreenUtil().orientation == Orientation.landscape
-                      ? 200.w
-                      : 250.w,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorHelper.secondaryOrangeColor),
-                    onPressed: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-
-
-                    },
-                    child: Text(
-                      'Create Account',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Constants.largeFontSizeCreateAccount),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 32),
+                                child: TextField(
+                                  controller: _companyPhoneTextController,
+                                  keyboardType: TextInputType.phone,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  // maxLength: 11,
+                                  decoration: InputDecoration(
+                                    labelText: 'Phone Number',
+                                    prefixIcon: const Icon(Icons.phone),
+                                    enabledBorder: Style.inputBorder(),
+                                    focusedBorder: Style.focusBorder(),
+                                  ),
+                                  style: Style.largeInputText(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 32),
+                                child: TextField(
+                                  controller: _companyEmailTextController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  // maxLength: 50,
+                                  decoration: InputDecoration(
+                                    labelText: 'Email',
+                                    prefixIcon: const Icon(Icons.mail),
+                                    enabledBorder: Style.inputBorder(),
+                                    focusedBorder: Style.focusBorder(),
+                                  ),
+                                  style: Style.largeInputText(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 32),
+                                child: TextField(
+                                  controller: _companyPasswordTextController,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: true,
+                                  // maxLength: 50,
+                                  decoration: InputDecoration(
+                                    labelText: 'Password',
+                                    prefixIcon: const Icon(Icons.lock),
+                                    enabledBorder: Style.inputBorder(),
+                                    focusedBorder: Style.focusBorder(),
+                                  ),
+                                  style: Style.largeInputText(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 32),
+                                child: TextField(
+                                  controller:
+                                      _companyConfirmPasswordTextController,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: true,
+                                  // maxLength: 50,
+                                  decoration: InputDecoration(
+                                    labelText: 'Confirm Password',
+                                    prefixIcon: const Icon(Icons.lock),
+                                    enabledBorder: Style.inputBorder(),
+                                    focusedBorder: Style.focusBorder(),
+                                  ),
+                                  style: Style.largeInputText(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          height: ScreenUtil().orientation ==
+                                  Orientation.landscape
+                              ? AppServices.getDeviceType() == DeviceType.phone
+                                  ? 50
+                                  : 60.h
+                              : 35.h,
+                          width:
+                              ScreenUtil().orientation == Orientation.landscape
+                                  ? 310.w
+                                  : 200.w,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    ColorHelper.secondaryOrangeColor),
+                            onPressed: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                            },
+                            child: Text(
+                              'Create Account',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      Constants.largeFontSizeCreateAccount),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         Positioned(
@@ -261,4 +285,31 @@ Widget customContainer() {
       ],
     ),
   );
+}
+
+double customPaddingSize() {
+  final screenOrientation = ScreenUtil().orientation;
+  final deviceType = AppServices.getDeviceType();
+
+  double paddingSize = 0;
+
+  if (screenOrientation == Orientation.portrait) {
+    if (deviceType == DeviceType.phone) {
+      paddingSize = 55.h;
+    } else if (deviceType == DeviceType.tablet) {
+      paddingSize = 30.h;
+    } else if (deviceType == DeviceType.desktop) {
+      paddingSize = 20.h;
+    }
+  } else if (screenOrientation == Orientation.landscape) {
+    if (deviceType == DeviceType.phone) {
+      paddingSize = 125.h;
+    } else if (deviceType == DeviceType.tablet) {
+      paddingSize = 10.h;
+    } else if (deviceType == DeviceType.desktop) {
+      paddingSize = 160.h;
+    }
+  }
+
+  return paddingSize;
 }
