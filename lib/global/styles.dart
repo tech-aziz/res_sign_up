@@ -26,9 +26,10 @@ class Style{
   }
 
   static TextStyle largeInputText() {
+    //30.sp : 15.sp
     return TextStyle(
         fontSize:
-            ScreenUtil().orientation == Orientation.portrait ? 16.sp : 8.sp,
+            ScreenUtil().orientation == Orientation.portrait ? 25.sp : 15.sp,
         color: Colors.black,
         fontWeight: FontWeight.bold);
   }

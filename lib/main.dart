@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
           home: const SignUp(),
         );
       },
+      designSize: const Size(800, 1280),
     );
   }
 }

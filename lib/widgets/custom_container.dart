@@ -5,19 +5,40 @@ import '../global/styles.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
 import '../utils/constants.dart';
+import 'custom_size.dart';
 
 Widget customContainer() {
+
   TextEditingController _companyNameTextController = TextEditingController();
   TextEditingController _companyAddressTextController = TextEditingController();
   TextEditingController _companyPhoneTextController = TextEditingController();
   TextEditingController _companyEmailTextController = TextEditingController();
-  TextEditingController _companyPasswordTextController =
-      TextEditingController();
-  TextEditingController _companyConfirmPasswordTextController =
-      TextEditingController();
+  TextEditingController _companyPasswordTextController = TextEditingController();
+  TextEditingController _companyConfirmPasswordTextController = TextEditingController();
 
   return Padding(
-    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 80),
+    padding: EdgeInsets.only(
+      left: ScreenUtil().orientation == Orientation.portrait
+          ? AppServices.getDeviceType() == DeviceType.phone
+              ? 20.h
+              : 20.h
+          : 20.h,
+      right: ScreenUtil().orientation == Orientation.portrait
+          ? AppServices.getDeviceType() == DeviceType.phone
+              ? 20.h
+              : 20.h
+          : 20.h,
+      bottom: ScreenUtil().orientation == Orientation.portrait
+          ? AppServices.getDeviceType() == DeviceType.phone
+              ? 20.h
+              : 20.h
+          : 20.h,
+      top: ScreenUtil().orientation == Orientation.portrait
+          ? AppServices.getDeviceType() == DeviceType.phone
+              ? 170.h
+              : 220.h
+          : 300.h,
+    ),
     child: Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.topCenter,
@@ -25,12 +46,12 @@ Widget customContainer() {
         Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(
                 offset: const Offset(0, 3),
-                blurRadius: 7,
-                spreadRadius: 5,
+                blurRadius: 7.r,
+                spreadRadius: 5.r,
                 color: Colors.grey.withOpacity(0.5),
               ),
             ],
@@ -38,18 +59,30 @@ Widget customContainer() {
           child: Column(
             children: [
               SizedBox(
-                height: ScreenUtil().orientation == Orientation.portrait
-                    ? AppServices.getDeviceType() == DeviceType.phone
-                        ? 500.h
-                        : 600.h
-                    : 370.h,
-
-
+                height: CustomSize.customSize(
+                    portPhone: 800.h,
+                    portTablet: 800.h,
+                    portDesktop: 500.h,
+                    landPhone: 770.h,
+                    landTablet: 700.h,
+                    landDestop: 500.h),
+                // height: ScreenUtil().orientation == Orientation.portrait
+                //     ? AppServices.getDeviceType() == DeviceType.phone
+                //         ? 550.h
+                //         : 600.h
+                //     : 500.h,
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
                   child: Padding(
-                    padding: EdgeInsets.only(top: customPaddingSize()),
+                    padding: EdgeInsets.only(
+                        top: CustomSize.customSize(
+                            portPhone: 60.h,
+                            portTablet: 90.h,
+                            portDesktop: 0.h,
+                            landPhone: 125.h,
+                            landTablet: 70.h,
+                            landDestop: 160.h)),
                     child: Column(
                       children: [
                         Row(
@@ -58,7 +91,7 @@ Widget customContainer() {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 32),
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextField(
                                   controller: _companyNameTextController,
                                   keyboardType: TextInputType.name,
@@ -75,8 +108,8 @@ Widget customContainer() {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: 30.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +117,7 @@ Widget customContainer() {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 32),
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextField(
                                   controller: _companyAddressTextController,
                                   keyboardType: TextInputType.streetAddress,
@@ -103,8 +136,8 @@ Widget customContainer() {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: 30.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +145,7 @@ Widget customContainer() {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 32),
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextField(
                                   controller: _companyPhoneTextController,
                                   keyboardType: TextInputType.phone,
@@ -132,8 +165,8 @@ Widget customContainer() {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: 30.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +174,7 @@ Widget customContainer() {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 32),
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextField(
                                   controller: _companyEmailTextController,
                                   keyboardType: TextInputType.emailAddress,
@@ -158,8 +191,8 @@ Widget customContainer() {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: 30.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +200,7 @@ Widget customContainer() {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 32),
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextField(
                                   controller: _companyPasswordTextController,
                                   keyboardType: TextInputType.visiblePassword,
@@ -185,8 +218,8 @@ Widget customContainer() {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: 30.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -194,7 +227,7 @@ Widget customContainer() {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 32),
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextField(
                                   controller:
                                       _companyConfirmPasswordTextController,
@@ -213,20 +246,20 @@ Widget customContainer() {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: 30.h,
                         ),
                         SizedBox(
                           height: ScreenUtil().orientation ==
                                   Orientation.landscape
                               ? AppServices.getDeviceType() == DeviceType.phone
-                                  ? 50
-                                  : 60.h
-                              : 35.h,
+                                  ? 40
+                                  : 50.h
+                              : 60.h,
                           width:
                               ScreenUtil().orientation == Orientation.landscape
-                                  ? 310.w
-                                  : 200.w,
+                                  ? 750.w
+                                  : 665.w,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor:
@@ -243,8 +276,8 @@ Widget customContainer() {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 25,
+                        SizedBox(
+                          height: 25.h,
                         ),
                       ],
                     ),
@@ -257,16 +290,49 @@ Widget customContainer() {
         Positioned(
             top: -60,
             child: Container(
-                height: 115,
-                width: 115,
+                height: ScreenUtil().orientation == Orientation.portrait &&
+                        AppServices.getDeviceType() == DeviceType.phone
+                    ? 140.h
+                    : ScreenUtil().orientation == Orientation.portrait &&
+                            AppServices.getDeviceType() == DeviceType.tablet
+                        ? 150.h
+                        : ScreenUtil().orientation == Orientation.portrait &&
+                                AppServices.getDeviceType() ==
+                                    DeviceType.desktop
+                            ? 100.h
+                            : ScreenUtil().orientation ==
+                                        Orientation.landscape &&
+                                    AppServices.getDeviceType() ==
+                                        DeviceType.phone
+                                ? 300.h
+                                : ScreenUtil().orientation ==
+                                            Orientation.landscape &&
+                                        AppServices.getDeviceType() ==
+                                            DeviceType.tablet
+                                    ? 155.h
+                                    : ScreenUtil().orientation ==
+                                                Orientation.landscape &&
+                                            AppServices.getDeviceType() ==
+                                                DeviceType.desktop
+                                        ? 400.h
+                                        : 100.h,
+
+                // customSize(
+                //     portPhone: 140.h,
+                //     portTablet: 0.h,
+                //     portDesktop: 40.h,
+                //     landPhone: 250.h,
+                //     landTablet: 110.h,
+                //     landDestop: 160.h),
+                // width: 100.w,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(100),
                   boxShadow: [
                     BoxShadow(
                       offset: const Offset(0, 3),
-                      blurRadius: 7,
-                      spreadRadius: 5,
+                      blurRadius: 7.r,
+                      spreadRadius: 5.r,
                       color: Colors.grey.withOpacity(0.2),
                     ),
                   ],
@@ -287,29 +353,33 @@ Widget customContainer() {
   );
 }
 
-double customPaddingSize() {
-  final screenOrientation = ScreenUtil().orientation;
-  final deviceType = AppServices.getDeviceType();
+// double customPaddingSize() {
+//   final screenOrientation = ScreenUtil().orientation;
+//   final deviceType = AppServices.getDeviceType();
 
-  double paddingSize = 0;
+//   double paddingSize = 0;
 
-  if (screenOrientation == Orientation.portrait) {
-    if (deviceType == DeviceType.phone) {
-      paddingSize = 55.h;
-    } else if (deviceType == DeviceType.tablet) {
-      paddingSize = 30.h;
-    } else if (deviceType == DeviceType.desktop) {
-      paddingSize = 20.h;
-    }
-  } else if (screenOrientation == Orientation.landscape) {
-    if (deviceType == DeviceType.phone) {
-      paddingSize = 125.h;
-    } else if (deviceType == DeviceType.tablet) {
-      paddingSize = 10.h;
-    } else if (deviceType == DeviceType.desktop) {
-      paddingSize = 160.h;
-    }
-  }
+//   if (screenOrientation == Orientation.portrait) {
+//     if (deviceType == DeviceType.phone) {
+//       paddingSize = 55.h;
+//     } else if (deviceType == DeviceType.tablet) {
+//       paddingSize = 30.h;
+//     } else if (deviceType == DeviceType.desktop) {
+//       paddingSize = 20.h;
+//     }
+//   } else if (screenOrientation == Orientation.landscape) {
+//     if (deviceType == DeviceType.phone) {
+//       paddingSize = 125.h;
+//     } else if (deviceType == DeviceType.tablet) {
+//       paddingSize = 10.h;
+//     } else if (deviceType == DeviceType.desktop) {
+//       paddingSize = 160.h;
+//     }
+//   }
 
-  return paddingSize;
-}
+//   return paddingSize;
+// }
+
+//To manage size for page orientation
+
+

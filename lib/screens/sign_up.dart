@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/app_services.dart';
 import '../widgets/custom_container.dart';
+import '../widgets/custom_size.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -20,23 +21,31 @@ class _SignUpState extends State<SignUp> {
           children: [
             Container(
               // height: 300,
-              height: ScreenUtil().orientation == Orientation.landscape
-                  ? AppServices.getDeviceType() == DeviceType.phone
-                      ? 300.h
-                      : 500.h
-                  : 225.h,
-              width: MediaQuery.of(context).size.width,
+              // height: ScreenUtil().orientation == Orientation.landscape
+              //     ? AppServices.getDeviceType() == DeviceType.phone
+              //         ? 300.h
+              //         : 500.h
+              //     : 225.h,
 
+              height: 
+              CustomSize.customSize(
+                    portPhone: 350.h,
+                    portTablet: 320.h,
+                    portDesktop: 10.h,
+                    landPhone: 560.h,
+                    landTablet: 400.h,
+                    landDestop: 160.h),
+              width: MediaQuery.of(context).size.width,   
               decoration: BoxDecoration(
                 color: Colors.orange,
-                borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(25),
-                    bottomLeft: Radius.circular(25)),
+                borderRadius:  BorderRadius.only(
+                    bottomRight: Radius.circular(25.r),
+                    bottomLeft: Radius.circular(25.r)),
                 boxShadow: [
                   BoxShadow(
                     offset: const Offset(0, 3),
-                    blurRadius: 7,
-                    spreadRadius: 5,
+                    blurRadius: 7.r,
+                    spreadRadius: 5.r,
                     color: Colors.grey.withOpacity(0.1),
                   ),
                 ],
@@ -44,7 +53,15 @@ class _SignUpState extends State<SignUp> {
             ),
             Positioned(
               child: SafeArea(
-                child: Container(
+                child: SizedBox(
+                  height: CustomSize.customSize(
+                    portPhone: 1030.h,
+                    portTablet: 1100.h,
+                    portDesktop: 0.h,
+                    landPhone: 1150.h,
+                    landTablet: 1150.h,
+                    landDestop: 0.h
+                  ),
                   child: customContainer(),
                 ),
               ),
