@@ -1,20 +1,25 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../global/styles.dart';
+import '../screens/login.dart';
+import '../screens/sign_up_repository.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
 import '../utils/constants.dart';
 import 'custom_size.dart';
 
-Widget customContainer() {
-
-  TextEditingController _companyNameTextController = TextEditingController();
-  TextEditingController _companyAddressTextController = TextEditingController();
-  TextEditingController _companyPhoneTextController = TextEditingController();
-  TextEditingController _companyEmailTextController = TextEditingController();
-  TextEditingController _companyPasswordTextController = TextEditingController();
-  TextEditingController _companyConfirmPasswordTextController = TextEditingController();
+Widget customContainer({
+  required TextEditingController companyNameTextController,
+  required TextEditingController companyAddressTextController,
+  required TextEditingController companyPhoneTextController,
+  required TextEditingController companyEmailTextController,
+  required TextEditingController companyPasswordTextController,
+  required TextEditingController companyConfirmPasswordTextController,
+}) {
+  SignUpRepository signUp = SignUpRepository();
 
   return Padding(
     padding: EdgeInsets.only(
@@ -56,235 +61,214 @@ Widget customContainer() {
               ),
             ],
           ),
-          child: Column(
-            children: [
-              SizedBox(
-                height: CustomSize.customSize(
-                    portPhone: 800.h,
-                    portTablet: 800.h,
-                    portDesktop: 500.h,
-                    landPhone: 770.h,
-                    landTablet: 700.h,
-                    landDestop: 500.h),
-                // height: ScreenUtil().orientation == Orientation.portrait
-                //     ? AppServices.getDeviceType() == DeviceType.phone
-                //         ? 550.h
-                //         : 600.h
-                //     : 500.h,
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: CustomSize.customSize(
-                            portPhone: 60.h,
-                            portTablet: 90.h,
-                            portDesktop: 0.h,
-                            landPhone: 125.h,
-                            landTablet: 70.h,
-                            landDestop: 160.h)),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: TextField(
-                                  controller: _companyNameTextController,
-                                  keyboardType: TextInputType.name,
-                                  // maxLength: 30,
-                                  decoration: InputDecoration(
-                                    labelText: 'Restaurant Name',
-                                    prefixIcon: const Icon(Icons.keyboard),
-                                    enabledBorder: Style.inputBorder(),
-                                    focusedBorder: Style.focusBorder(),
-                                  ),
-                                  style: Style.largeInputText(),
-                                ),
-                              ),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: CustomSize.customSize(
+                      portPhone: 60.h,
+                      portTablet: 95.h,
+                      portDesktop: 0.h,
+                      landPhone: 125.h,
+                      landTablet: 81.h,
+                      landDestop: 160.h)),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextField(
+                            onChanged: (String value) {},
+                            controller: companyNameTextController,
+                            keyboardType: TextInputType.name,
+                            // maxLength: 30,
+                            decoration: InputDecoration(
+                              labelText: 'Restaurant Name',
+                              prefixIcon: const Icon(Icons.keyboard),
+                              enabledBorder: Style.inputBorder(),
+                              focusedBorder: Style.focusBorder(),
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: TextField(
-                                  controller: _companyAddressTextController,
-                                  keyboardType: TextInputType.streetAddress,
-                                  // maxLength: 160,
-                                  minLines: 1,
-                                  maxLines: 2,
-                                  decoration: InputDecoration(
-                                    labelText: 'Address',
-                                    prefixIcon: const Icon(Icons.location_on),
-                                    enabledBorder: Style.inputBorder(),
-                                    focusedBorder: Style.focusBorder(),
-                                  ),
-                                  style: Style.largeInputText(),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: TextField(
-                                  controller: _companyPhoneTextController,
-                                  keyboardType: TextInputType.phone,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  // maxLength: 11,
-                                  decoration: InputDecoration(
-                                    labelText: 'Phone Number',
-                                    prefixIcon: const Icon(Icons.phone),
-                                    enabledBorder: Style.inputBorder(),
-                                    focusedBorder: Style.focusBorder(),
-                                  ),
-                                  style: Style.largeInputText(),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: TextField(
-                                  controller: _companyEmailTextController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  // maxLength: 50,
-                                  decoration: InputDecoration(
-                                    labelText: 'Email',
-                                    prefixIcon: const Icon(Icons.mail),
-                                    enabledBorder: Style.inputBorder(),
-                                    focusedBorder: Style.focusBorder(),
-                                  ),
-                                  style: Style.largeInputText(),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: TextField(
-                                  controller: _companyPasswordTextController,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  obscureText: true,
-                                  // maxLength: 50,
-                                  decoration: InputDecoration(
-                                    labelText: 'Password',
-                                    prefixIcon: const Icon(Icons.lock),
-                                    enabledBorder: Style.inputBorder(),
-                                    focusedBorder: Style.focusBorder(),
-                                  ),
-                                  style: Style.largeInputText(),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: TextField(
-                                  controller:
-                                      _companyConfirmPasswordTextController,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  obscureText: true,
-                                  // maxLength: 50,
-                                  decoration: InputDecoration(
-                                    labelText: 'Confirm Password',
-                                    prefixIcon: const Icon(Icons.lock),
-                                    enabledBorder: Style.inputBorder(),
-                                    focusedBorder: Style.focusBorder(),
-                                  ),
-                                  style: Style.largeInputText(),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        SizedBox(
-                          height: ScreenUtil().orientation ==
-                                  Orientation.landscape
-                              ? AppServices.getDeviceType() == DeviceType.phone
-                                  ? 40
-                                  : 50.h
-                              : 60.h,
-                          width:
-                              ScreenUtil().orientation == Orientation.landscape
-                                  ? 750.w
-                                  : 665.w,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    ColorHelper.secondaryOrangeColor),
-                            onPressed: () {
-                              FocusManager.instance.primaryFocus?.unfocus();
-                            },
-                            child: Text(
-                              'Create Account',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize:
-                                      Constants.largeFontSizeCreateAccount),
-                            ),
+                            style: Style.largeInputText(),
                           ),
                         ),
-                        SizedBox(
-                          height: 25.h,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextField(
+                            controller: companyAddressTextController,
+                            keyboardType: TextInputType.streetAddress,
+                            // maxLength: 160,
+                            minLines: 1,
+                            maxLines: 2,
+                            decoration: InputDecoration(
+                              labelText: 'Address',
+                              prefixIcon: const Icon(Icons.location_on),
+                              enabledBorder: Style.inputBorder(),
+                              focusedBorder: Style.focusBorder(),
+                            ),
+                            style: Style.largeInputText(),
+                          ),
                         ),
-                      ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextField(
+                            controller: companyPhoneTextController,
+                            keyboardType: TextInputType.phone,
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly
+                            // ],
+                            // maxLength: 11,
+                            decoration: InputDecoration(
+                              labelText: 'Phone Number',
+                              prefixIcon: const Icon(Icons.phone),
+                              enabledBorder: Style.inputBorder(),
+                              focusedBorder: Style.focusBorder(),
+                            ),
+                            style: Style.largeInputText(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextField(
+                            controller: companyEmailTextController,
+                            keyboardType: TextInputType.emailAddress,
+                            // maxLength: 50,
+                            decoration: InputDecoration(
+                              labelText: 'Email',
+                              prefixIcon: const Icon(Icons.mail),
+                              enabledBorder: Style.inputBorder(),
+                              focusedBorder: Style.focusBorder(),
+                            ),
+                            style: Style.largeInputText(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextField(
+                            controller: companyPasswordTextController,
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: true,
+                            // maxLength: 50,
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              prefixIcon: const Icon(Icons.lock),
+                              enabledBorder: Style.inputBorder(),
+                              focusedBorder: Style.focusBorder(),
+                            ),
+                            style: Style.largeInputText(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextField(
+                            controller: companyConfirmPasswordTextController,
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: true,
+                            // maxLength: 50,
+                            decoration: InputDecoration(
+                              labelText: 'Confirm Password',
+                              prefixIcon: const Icon(Icons.lock),
+                              enabledBorder: Style.inputBorder(),
+                              focusedBorder: Style.focusBorder(),
+                            ),
+                            style: Style.largeInputText(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  SizedBox(
+                    height: ScreenUtil().orientation == Orientation.landscape
+                        ? AppServices.getDeviceType() == DeviceType.phone
+                            ? 40
+                            : 78.h
+                        : 60.h,
+                    width: ScreenUtil().orientation == Orientation.landscape
+                        ? 750.w
+                        : 665.w,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorHelper.secondaryOrangeColor),
+                      onPressed: () {
+                        print('sign up successfully done');
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        signUp.createRestaurant(
+                            companyNameTextController.text,
+                            companyPhoneTextController.text,
+                            companyAddressTextController.text,
+                            companyEmailTextController.text,
+                            companyPasswordTextController.text);
+                      },
+                      child: Text(
+                        'Create Account',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Constants.largeFontSizeCreateAccount),
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: 25.h,
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
         Positioned(
@@ -309,7 +293,7 @@ Widget customContainer() {
                                             Orientation.landscape &&
                                         AppServices.getDeviceType() ==
                                             DeviceType.tablet
-                                    ? 155.h
+                                    ? 170.h
                                     : ScreenUtil().orientation ==
                                                 Orientation.landscape &&
                                             AppServices.getDeviceType() ==

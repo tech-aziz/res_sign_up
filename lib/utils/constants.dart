@@ -19,6 +19,6 @@ class Constants{
                     portTablet: 0.h,
                     portDesktop: 0.h,
                     landPhone: 0.h,
-                    landTablet: 30.h,
+                    landTablet: 35.h,
                     landDestop: 0.h) : 0 ;
 }

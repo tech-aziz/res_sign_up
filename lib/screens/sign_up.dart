@@ -12,6 +12,25 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+
+  TextEditingController _companyNameTextController = TextEditingController();
+  TextEditingController _companyAddressTextController = TextEditingController();
+  TextEditingController _companyPhoneTextController = TextEditingController();
+  TextEditingController _companyEmailTextController = TextEditingController();
+  TextEditingController _companyPasswordTextController = TextEditingController();
+  TextEditingController _companyConfirmPasswordTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    _companyNameTextController.dispose();
+    _companyAddressTextController.dispose();
+    _companyPhoneTextController.dispose();
+    _companyEmailTextController.dispose();
+    _companyPasswordTextController.dispose();
+    _companyConfirmPasswordTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -27,18 +46,17 @@ class _SignUpState extends State<SignUp> {
               //         : 500.h
               //     : 225.h,
 
-              height: 
-              CustomSize.customSize(
-                    portPhone: 350.h,
-                    portTablet: 320.h,
-                    portDesktop: 10.h,
-                    landPhone: 560.h,
-                    landTablet: 400.h,
-                    landDestop: 160.h),
-              width: MediaQuery.of(context).size.width,   
+              height: CustomSize.customSize(
+                  portPhone: 350.h,
+                  portTablet: 320.h,
+                  portDesktop: 10.h,
+                  landPhone: 560.h,
+                  landTablet: 400.h,
+                  landDestop: 160.h),
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.orange,
-                borderRadius:  BorderRadius.only(
+                borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(25.r),
                     bottomLeft: Radius.circular(25.r)),
                 boxShadow: [
@@ -55,14 +73,20 @@ class _SignUpState extends State<SignUp> {
               child: SafeArea(
                 child: SizedBox(
                   height: CustomSize.customSize(
-                    portPhone: 1030.h,
-                    portTablet: 1100.h,
-                    portDesktop: 0.h,
-                    landPhone: 1150.h,
-                    landTablet: 1150.h,
-                    landDestop: 0.h
+                      portPhone: 1050.h,
+                      portTablet: 1100.h,
+                      portDesktop: 0.h,
+                      landPhone: 1150.h,
+                      landTablet: 1150.h,
+                      landDestop: 0.h),
+                  child: customContainer(
+                    companyNameTextController: _companyNameTextController,
+                    companyAddressTextController: _companyAddressTextController,
+                    companyEmailTextController: _companyEmailTextController,
+                    companyPhoneTextController: _companyPhoneTextController,
+                    companyPasswordTextController: _companyPasswordTextController,
+                    companyConfirmPasswordTextController: _companyConfirmPasswordTextController,
                   ),
-                  child: customContainer(),
                 ),
               ),
             )

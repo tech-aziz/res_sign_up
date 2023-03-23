@@ -6,8 +6,7 @@ import 'screens/sign_up.dart';
 void main() {
   runApp(const MyApp());
   SystemChrome.setSystemUIOverlayStyle(
-   const SystemUiOverlayStyle(
-      statusBarColor: Colors.orange ));
+      const SystemUiOverlayStyle(statusBarColor: Colors.orange));
 }
 
 class MyApp extends StatelessWidget {
