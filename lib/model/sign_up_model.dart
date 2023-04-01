@@ -4,18 +4,18 @@
 
 import 'dart:convert';
 
-SignUpModel signUpModelFromJson(String str) => SignUpModel.fromJson(json.decode(str));
+SignUpModel signUpModelFromJson(String str) => SignUpModel.fromMap(json.decode(str));
 
-String signUpModelToJson(SignUpModel data) => json.encode(data.toJson());
+String signUpModelToJson(SignUpModel data) => json.encode(data.toMap());
 
 class SignUpModel {
     SignUpModel({
-        this.id,
-        this.restaurantName,
-        this.restaurantAddress,
-        this.restaurantMobileNumber,
-        this.restaurantEmail,
-        this.restaurantPassword,
+        required this.id,
+        required this.restaurantName,
+        required this.restaurantAddress,
+        required this.restaurantMobileNumber,
+        required this.restaurantEmail,
+        required this.restaurantPassword,
     });
 
     int? id;
@@ -25,16 +25,17 @@ class SignUpModel {
     String? restaurantEmail;
     String? restaurantPassword;
 
-    factory SignUpModel.fromJson(Map<String, dynamic> json) => SignUpModel(
-        id: json["id"],
-        restaurantName: json["restaurant_name"],
-        restaurantAddress: json["restaurant_address"],
-        restaurantMobileNumber: json["restaurant_mobile_number"],
-        restaurantEmail: json["restaurant_email"],
-        restaurantPassword: json["restaurant_password"],
+//database amader ekta map diye dey ba object dey, database theke data anar jonno fromjson / fromMap method use hoy 
+    factory SignUpModel.fromMap(Map<String, dynamic> map) => SignUpModel(
+        id: map["id"],
+        restaurantName: map["restaurant_name"],
+        restaurantAddress: map["restaurant_address"],
+        restaurantMobileNumber: map["restaurant_mobile_number"],
+        restaurantEmail: map["restaurant_email"],
+        restaurantPassword: map["restaurant_password"],
     );
-
-    Map<String, dynamic> toJson() => {
+//databae map ney, model ney nah, toJson hocce database e data pathanor jonno
+    Map<String, dynamic> toMap() => {
         "id": id,
         "restaurant_name": restaurantName,
         "restaurant_address": restaurantAddress,
