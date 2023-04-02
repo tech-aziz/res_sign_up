@@ -5,9 +5,9 @@ import '../database/database_info.dart';
 import '../database/init_database.dart';
 import '../model/base_response.dart';
 import '../model/sign_up_model.dart';
+import '../utils/snack_messages.dart';
 
 class SignUpRepository {
-
   Database? _database;
 
   // ignore: non_constant_identifier_names
@@ -25,7 +25,7 @@ class SignUpRepository {
     }
 
     try {
-      var query = 'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo };';
+      var query = 'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo};';
 
       var data = await _database!.rawQuery(query);
 
@@ -71,7 +71,7 @@ class SignUpRepository {
   }
 
   //Create SignUp
-  createRestaurant(
+createRestaurant(
     String name,
     String mobile,
     String address,
@@ -90,13 +90,14 @@ class SignUpRepository {
           'VALUES (?, ?, ?, ?, ?);';
       var values = [name, mobile, address, email, password];
 
-      int id = await _database!.rawInsert(query, values);
+    final int id = await _database!.rawInsert(query, values);
 
       if (id > 0) {
-        print("Restaurant accoutn created $id");
+        print("Restaurant account created $id"); 
         return BaseResponse(true, 'Restaurant Account Created', null);
+      
       } else {
-        print("Restaurant accoutn not created");
+        print("Restaurant account not created");
         return BaseResponse(false, 'Could Not Create Restaurant Account', null);
       }
     } catch (exception) {

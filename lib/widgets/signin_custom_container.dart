@@ -1,25 +1,25 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../global/styles.dart';
 import '../screens/login.dart';
 import '../screens/sign_up_repository.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
 import '../utils/constants.dart';
+import '../utils/snack_messages.dart';
 import 'custom_size.dart';
 
-Widget customContainer({
-  required TextEditingController companyNameTextController,
-  required TextEditingController companyAddressTextController,
-  required TextEditingController companyPhoneTextController,
+Widget signInCustomContainer({
   required TextEditingController companyEmailTextController,
   required TextEditingController companyPasswordTextController,
-  required TextEditingController companyConfirmPasswordTextController,
 }) {
   SignUpRepository signUp = SignUpRepository();
+  // final _formKey = GlobalKey<FormState>();
 
   return Padding(
     padding: EdgeInsets.only(
@@ -82,87 +82,6 @@ Widget customContainer({
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
-                            onChanged: (String value) {},
-                            controller: companyNameTextController,
-                            keyboardType: TextInputType.name,
-                            // maxLength: 30,
-                            decoration: InputDecoration(
-                              labelText: 'Restaurant Name',
-                              prefixIcon: const Icon(Icons.keyboard),
-                              enabledBorder: Style.inputBorder(),
-                              focusedBorder: Style.focusBorder(),
-                            ),
-                            style: Style.largeInputText(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            controller: companyAddressTextController,
-                            keyboardType: TextInputType.streetAddress,
-                            // maxLength: 160,
-                            minLines: 1,
-                            maxLines: 2,
-                            decoration: InputDecoration(
-                              labelText: 'Address',
-                              prefixIcon: const Icon(Icons.location_on),
-                              enabledBorder: Style.inputBorder(),
-                              focusedBorder: Style.focusBorder(),
-                            ),
-                            style: Style.largeInputText(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            controller: companyPhoneTextController,
-                            keyboardType: TextInputType.phone,
-                            // inputFormatters: [
-                            //   FilteringTextInputFormatter.digitsOnly
-                            // ],
-                            // maxLength: 11,
-                            decoration: InputDecoration(
-                              labelText: 'Phone Number',
-                              prefixIcon: const Icon(Icons.phone),
-                              enabledBorder: Style.inputBorder(),
-                              focusedBorder: Style.focusBorder(),
-                            ),
-                            style: Style.largeInputText(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
                             controller: companyEmailTextController,
                             keyboardType: TextInputType.emailAddress,
                             // maxLength: 50,
@@ -207,32 +126,6 @@ Widget customContainer({
                   SizedBox(
                     height: 30.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
-                            controller: companyConfirmPasswordTextController,
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            // maxLength: 50,
-                            decoration: InputDecoration(
-                              labelText: 'Confirm Password',
-                              prefixIcon: const Icon(Icons.lock),
-                              enabledBorder: Style.inputBorder(),
-                              focusedBorder: Style.focusBorder(),
-                            ),
-                            style: Style.largeInputText(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
                   SizedBox(
                     height: ScreenUtil().orientation == Orientation.landscape
                         ? AppServices.getDeviceType() == DeviceType.phone
@@ -246,17 +139,19 @@ Widget customContainer({
                       style: ElevatedButton.styleFrom(
                           backgroundColor: ColorHelper.secondaryOrangeColor),
                       onPressed: () {
-                        print('sign up successfully done');
+                        // signUp.createRestaurant(
+                        //   companyEmailTextController.text,
+                        //   companyPasswordTextController.text
+                        //   );
+                        print('sign in successfully done');
                         FocusManager.instance.primaryFocus?.unfocus();
-                        signUp.createRestaurant(
-                            companyNameTextController.text,
-                            companyPhoneTextController.text,
-                            companyAddressTextController.text,
-                            companyEmailTextController.text,
-                            companyPasswordTextController.text);
+
+                        //clear filed
+                        companyEmailTextController.clear();
+                        companyPasswordTextController.clear();
                       },
                       child: Text(
-                        'Create Account',
+                        'Sign in',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: Constants.largeFontSizeCreateAccount),
@@ -264,7 +159,36 @@ Widget customContainer({
                     ),
                   ),
                   SizedBox(
-                    height: 25.h,
+                    height: 30.h,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: 'Have\'t an account?',
+                                  style: Style.largeInputText()),
+                              TextSpan(
+                                  text: ' Sign up',
+                                  style: const TextStyle(
+                                      color: Colors.amber,
+                                      fontWeight: FontWeight.bold),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Get.back();
+                                    }),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30.h,
                   ),
                 ],
               ),
@@ -326,10 +250,8 @@ Widget customContainer({
                     // Navigator.of(context).pop();
                   },
                   child: const Image(
-                    image: ResizeImage(
-                        AssetImage('assets/images/camera-plus-svgrepo-com.png'),
-                        width: 65,
-                        height: 65),
+                    image: ResizeImage(AssetImage('assets/images/person.png'),
+                        width: 60, height: 60),
                   ),
                 )))
       ],

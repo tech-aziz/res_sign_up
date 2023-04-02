@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/app_services.dart';
-import '../widgets/custom_container.dart';
+import '../widgets/signup_custom_container.dart';
 import '../widgets/custom_size.dart';
 
 class SignUp extends StatefulWidget {
@@ -73,13 +73,13 @@ class _SignUpState extends State<SignUp> {
               child: SafeArea(
                 child: SizedBox(
                   height: CustomSize.customSize(
-                      portPhone: 1050.h,
+                      portPhone: 1450.h,
                       portTablet: 1100.h,
                       portDesktop: 0.h,
                       landPhone: 1150.h,
                       landTablet: 1150.h,
                       landDestop: 0.h),
-                  child: customContainer(
+                  child: signUpCustomContainer(
                     companyNameTextController: _companyNameTextController,
                     companyAddressTextController: _companyAddressTextController,
                     companyEmailTextController: _companyEmailTextController,
