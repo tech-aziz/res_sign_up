@@ -1,0 +1,48 @@
+[33mcommit f940b723d7f4f58e567b589f58e67236cff068e3[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: tech-aziz <aziz.swe71@gmail.com>
+Date:   Sun Apr 2 15:54:14 2023 +0600
+
+    sign in page design
+
+[33mcommit 3ea87e54e9c6b4b53ff9b3b40cb15d994e04abc3[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Azizul Hakim <aziz.swe71@gmail.com>
+Date:   Sun Apr 2 00:59:35 2023 +0600
+
+    signup page done
+
+[33mcommit 83e6da17652ff1b185490665fa83738c69749c16[m
+Author: tech-aziz <aziz.swe71@gmail.com>
+Date:   Thu Mar 23 18:55:44 2023 +0600
+
+    database implementation but not working properly
+
+[33mcommit 225f47927d5469fb874feafa8d39e8a1ebc0a669[m
+Merge: 0d86e92 7e8722d
+Author: tech-aziz <aziz.swe71@gmail.com>
+Date:   Wed Mar 22 19:00:51 2023 +0600
+
+    properly responsive design done
+
+[33mcommit 0d86e925c017319a928078a83e263e95feb871c1[m
+Author: tech-aziz <aziz.swe71@gmail.com>
+Date:   Tue Mar 21 18:58:33 2023 +0600
+
+    make responsive using the screenutil package
+
+[33mcommit 7e8722deb3e6b15f20e6c3072f3d9f16bb1aff34[m
+Author: Azizul Hakim <aziz.swe71@gmail.com>
+Date:   Tue Mar 21 02:47:08 2023 +0600
+
+    add database fulder
+
+[33mcommit 60fe79dbee0ad4510629338ea0ba6abcff1d7cee[m
+Author: tech-aziz <aziz.swe71@gmail.com>
+Date:   Mon Mar 20 16:44:12 2023 +0600
+
+    sign up page done
+
+[33mcommit dc0a10703cfb3849bae331717fd3e3155c19e37c[m
+Author: tech-aziz <aziz.swe71@gmail.com>
+Date:   Mon Mar 20 16:41:37 2023 +0600
+
+    first commit

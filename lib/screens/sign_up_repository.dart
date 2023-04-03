@@ -18,6 +18,12 @@ class SignUpRepository {
   void _initDatabase() async {
     _database = await InitDatabase().open();
   }
+//sob data age fetch korechen ?humm
+  // vai ek kaj ta kemne korte hobe jodi dekhai diten.
+  // wait ami akta query dicchi
+  // ok vai
+  // ami query ta lan a dicchi
+  //ok den vai
 
   getRestaurantList() async {
     if (_database == null || !_database!.isOpen) {
@@ -70,6 +76,8 @@ class SignUpRepository {
     }
   }
 
+
+
   //Create SignUp
 createRestaurant(
     String name,
@@ -106,3 +114,13 @@ createRestaurant(
     }
   }
 }
+
+// paisen ? hum vai paichi but login er kaj ta korte parchi nah.
+// table a search diye check korben je email and password input dicchen oita table ache ki na
+// thakle log in hobe na hole no user found...vai eitai korte pari nai onk try korchi basay o
+// query kunta disen ?
+
+// var result = await db.rawQuery('SELECT * FROM my_table WHERE email=?', ['email']);
+//  ei query dile akta row er data paben. data gula hocche je email disen oi email er user er. er por oi row er email and password app a input dewa email and password er match korben. match hole log in hobe
+//  query te je email diben oi email ta hobe app a input dewa email
+//  db.rawQuery('SELECT * FROM my_table WHERE email_column_name=?', ['user_email']);
