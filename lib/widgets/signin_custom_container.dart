@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../global/styles.dart';
+import '../screens/home_page.dart';
 import '../screens/login.dart';
 import '../screens/login_repository.dart';
 import '../screens/sign_up_repository.dart';
@@ -144,12 +145,12 @@ Widget signInCustomContainer({
                           companyEmailTextController.text,
                           companyPasswordTextController.text
                           );
-                        print('sign in successfully done');
                         FocusManager.instance.primaryFocus?.unfocus();
 
                         //clear filed
                         companyEmailTextController.clear();
                         companyPasswordTextController.clear();
+
                       },
                       child: Text(
                         'Sign in',

@@ -23,16 +23,22 @@ class LoginRepository {
     String email,
     String password,
   ) async {
-    if (_database == null || !_database!.isOpen) {
-      _database = await InitDatabase().open();
-    }
-
     try {
-      var query = 'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo}'
-          ' WHERE ${DatabaseInfo.columnRestaurantEmail}=? AND ${DatabaseInfo.columnRestaurantPassword}=?';
-
-      var data = await _database!.rawQuery(query);
-    } catch (exception) {}
+      // var query = 'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo}'
+      //     ' WHERE ${DatabaseInfo.columnRestaurantEmail}=? AND ${DatabaseInfo.columnRestaurantPassword}=?';
+      List<Map> result = await _database!.rawQuery(
+          'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo} WHERE ${DatabaseInfo.columnRestaurantEmail}=? and ${DatabaseInfo.columnRestaurantPassword}=?',
+          [email, password]);
+      if (result.isNotEmpty) {
+        print('sign in successfully done');
+      } else {
+        print("Log in failed");
+      }
+      print(result);
+    } catch (exception) {
+      debugPrint(exception.toString());
+      return BaseResponse(false, 'Database Exception', null);
+    }
   }
 
 // getRestaurantList() async {
