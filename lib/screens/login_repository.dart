@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:res_sign_up/screens/home_page.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../database/database_info.dart';
 import '../database/init_database.dart';
 import '../model/base_response.dart';
 import '../model/sign_up_model.dart';
+import '../utils/snack_messages.dart';
 
 class LoginRepository {
   Database? _database;
@@ -23,22 +26,37 @@ class LoginRepository {
     String email,
     String password,
   ) async {
+    if (_database == null || !_database!.isOpen) {
+      _database = await InitDatabase().open();
+    }
     try {
       // var query = 'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo}'
       //     ' WHERE ${DatabaseInfo.columnRestaurantEmail}=? AND ${DatabaseInfo.columnRestaurantPassword}=?';
+      // var data = await _database!.rawQuery(query);
+
       List<Map> result = await _database!.rawQuery(
           'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo} WHERE ${DatabaseInfo.columnRestaurantEmail}=? and ${DatabaseInfo.columnRestaurantPassword}=?',
           [email, password]);
-      if (result.isNotEmpty) {
-        print('sign in successfully done');
+      if (result.isNotEmpty & email.isNotEmpty & password.isNotEmpty) {
+        print('Sign in successfully done');
+        SnackMessage.showSuccess('Sign in successfully done');
+        Get.to(() => homePage());
       } else {
-        print("Log in failed");
+        print('Log in failed');
+        SnackMessage.showWarning(' Email & Password not correct');
       }
-      print(result);
+      // print(result);
     } catch (exception) {
       debugPrint(exception.toString());
       return BaseResponse(false, 'Database Exception', null);
     }
+  }
+  //vai validation ta korte hobe ekhon jemon dekhachi ami wait
+// mane faka falue o insert hocce eita korte hobe ekhon
+
+
+  Widget homePage() {
+    return const HomePage();
   }
 
 // getRestaurantList() async {

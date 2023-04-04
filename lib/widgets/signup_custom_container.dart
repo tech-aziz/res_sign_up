@@ -23,7 +23,7 @@ Widget signUpCustomContainer({
   required TextEditingController companyConfirmPasswordTextController,
 }) {
   SignUpRepository signUp = SignUpRepository();
-  // final _formKey = GlobalKey<FormState>();
+  // final formKey = GlobalKey<FormState>();
 
   return Padding(
     padding: EdgeInsets.only(
@@ -85,11 +85,12 @@ Widget signUpCustomContainer({
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: TextField(
+                          child: TextFormField(
                             onChanged: (String value) {},
                             // validator: (value) {
-                            //   if (value == null || value.isEmpty) {
-                            //     return 'Please enter restaurant name';
+                            //   if (value!.isEmpty ||
+                            //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                            //     return ' Enter currect restaurant name';
                             //   }
                             //   return null;
                             // },
@@ -263,22 +264,45 @@ Widget signUpCustomContainer({
                       style: ElevatedButton.styleFrom(
                           backgroundColor: ColorHelper.secondaryOrangeColor),
                       onPressed: () {
-                        signUp.createRestaurant(
-                            companyNameTextController.text,
-                            companyPhoneTextController.text,
-                            companyAddressTextController.text,
-                            companyEmailTextController.text,
-                            companyPasswordTextController.text);
-                        print('sign up successfully done');
-                        FocusManager.instance.primaryFocus?.unfocus();
+                        if (companyNameTextController.text.isEmpty) {
+                          //show snackbar
+                          SnackMessage.showSuccess('Name is required');
+                        }
+                        if (companyPhoneTextController.text.isEmpty) {
+                          //show snackbar
+                          SnackMessage.showSuccess('Phone is required');
+                        }
+                        if (companyAddressTextController.text.isEmpty) {
+                          //show snackbar
+                          SnackMessage.showSuccess('Address is required');
+                        }
+                        if (companyEmailTextController.text.isEmpty) {
+                          //show snackbar
+                          SnackMessage.showSuccess('Email is required');
+                        }
+                        if (companyPasswordTextController.text.isEmpty) {
+                          //show snackbar
+                          SnackMessage.showSuccess('Password is required');
+                        } else {
+                          signUp.createRestaurant(
+                              companyNameTextController.text,
+                              companyPhoneTextController.text,
+                              companyAddressTextController.text,
+                              companyEmailTextController.text,
+                              companyPasswordTextController.text);
+                          print('sign up successfully done');
+                          SnackMessage.showSuccess('Sign up successfully done');
+                          Get.to(() => const LoginScreen());
+                          FocusManager.instance.primaryFocus?.unfocus();
 
-                        //clear filed
-                        companyNameTextController.clear();
-                        companyPhoneTextController.clear();
-                        companyAddressTextController.clear();
-                        companyEmailTextController.clear();
-                        companyPasswordTextController.clear();
-                        companyConfirmPasswordTextController.clear();
+                          //clear filed
+                          companyNameTextController.clear();
+                          companyPhoneTextController.clear();
+                          companyAddressTextController.clear();
+                          companyEmailTextController.clear();
+                          companyPasswordTextController.clear();
+                          companyConfirmPasswordTextController.clear();
+                        }
                       },
                       child: Text(
                         'Create Account',
@@ -310,7 +334,7 @@ Widget signUpCustomContainer({
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       print('Login Text Clicked');
-                                      Get.to(const LoginScreen());
+                                      Get.to(() => const LoginScreen());
                                     }),
                             ],
                           ),
@@ -420,5 +444,3 @@ Widget signUpCustomContainer({
 // }
 
 //To manage size for page orientation
-
-
