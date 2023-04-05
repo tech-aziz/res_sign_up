@@ -20,6 +20,8 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _companyPasswordTextController = TextEditingController();
   TextEditingController _companyConfirmPasswordTextController = TextEditingController();
 
+   // static final formKey = GlobalKey<FormState>();
+
   @override
   void dispose() {
     _companyNameTextController.dispose();

@@ -23,7 +23,7 @@ Widget signUpCustomContainer({
   required TextEditingController companyConfirmPasswordTextController,
 }) {
   SignUpRepository signUp = SignUpRepository();
-  // final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   return Padding(
     padding: EdgeInsets.only(
