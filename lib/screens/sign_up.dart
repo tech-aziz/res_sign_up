@@ -12,15 +12,19 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-
-  TextEditingController _companyNameTextController = TextEditingController();
-  TextEditingController _companyAddressTextController = TextEditingController();
-  TextEditingController _companyPhoneTextController = TextEditingController();
-  TextEditingController _companyEmailTextController = TextEditingController();
-  TextEditingController _companyPasswordTextController = TextEditingController();
-  TextEditingController _companyConfirmPasswordTextController = TextEditingController();
-
-   // static final formKey = GlobalKey<FormState>();
+  final TextEditingController _companyNameTextController =
+      TextEditingController();
+  final TextEditingController _companyAddressTextController =
+      TextEditingController();
+  final TextEditingController _companyPhoneTextController =
+      TextEditingController();
+  final TextEditingController _companyEmailTextController =
+      TextEditingController();
+  final TextEditingController _companyPasswordTextController =
+      TextEditingController();
+  final TextEditingController _companyConfirmPasswordTextController =
+      TextEditingController();
+  static final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -82,13 +86,16 @@ class _SignUpState extends State<SignUp> {
                       landTablet: 1150.h,
                       landDestop: 0.h),
                   child: signUpCustomContainer(
-                    companyNameTextController: _companyNameTextController,
-                    companyAddressTextController: _companyAddressTextController,
-                    companyEmailTextController: _companyEmailTextController,
-                    companyPhoneTextController: _companyPhoneTextController,
-                    companyPasswordTextController: _companyPasswordTextController,
-                    companyConfirmPasswordTextController: _companyConfirmPasswordTextController,
-                  ),
+                      companyNameTextController: _companyNameTextController,
+                      companyAddressTextController:
+                          _companyAddressTextController,
+                      companyEmailTextController: _companyEmailTextController,
+                      companyPhoneTextController: _companyPhoneTextController,
+                      companyPasswordTextController:
+                          _companyPasswordTextController,
+                      companyConfirmPasswordTextController:
+                          _companyConfirmPasswordTextController,
+                      formKey: _formKey),
                 ),
               ),
             )

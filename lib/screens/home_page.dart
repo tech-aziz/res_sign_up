@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../global/styles.dart';
+
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  String? email;
+  String? password;
+  HomePage({super.key, required this.email, this.password});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,7 +23,23 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [Text('Home Page')],
+          children: [
+            Card(
+              elevation: 12,
+              child: Column(
+                children: [
+                  Text(
+                    widget.email.toString(),
+                    style: Style.largeInputText(),
+                  ),
+                  Text(
+                    widget.password.toString(),
+                    style: Style.largeInputText(),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

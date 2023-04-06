@@ -11,13 +11,14 @@ import '../utils/snack_messages.dart';
 
 class LoginRepository {
   Database? _database;
+  String? companyEmailTextController;
+  String? companyPasswordTextController;
+  LoginRepository(
+      {initDatabase,
+      required this.companyEmailTextController,
+      required this.companyPasswordTextController});
 
-  // ignore: non_constant_identifier_names
-  LoginRepository() {
-    _initDatabase();
-  }
-
-  void _initDatabase() async {
+  void initDatabase() async {
     _database = await InitDatabase().open();
   }
 
@@ -29,6 +30,7 @@ class LoginRepository {
     if (_database == null || !_database!.isOpen) {
       _database = await InitDatabase().open();
     }
+
     try {
       // var query = 'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo}'
       //     ' WHERE ${DatabaseInfo.columnRestaurantEmail}=? AND ${DatabaseInfo.columnRestaurantPassword}=?';
@@ -37,6 +39,7 @@ class LoginRepository {
       List<Map> result = await _database!.rawQuery(
           'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo} WHERE ${DatabaseInfo.columnRestaurantEmail}=? and ${DatabaseInfo.columnRestaurantPassword}=?',
           [email, password]);
+
       if (result.isNotEmpty & email.isNotEmpty & password.isNotEmpty) {
         print('Sign in successfully done');
         SnackMessage.showSuccess('Sign in successfully done');
@@ -45,6 +48,7 @@ class LoginRepository {
         print('Log in failed');
         SnackMessage.showWarning(' Email & Password not correct');
       }
+
       // print(result);
     } catch (exception) {
       debugPrint(exception.toString());
@@ -54,9 +58,11 @@ class LoginRepository {
   //vai validation ta korte hobe ekhon jemon dekhachi ami wait
 // mane faka falue o insert hocce eita korte hobe ekhon
 
-
   Widget homePage() {
-    return const HomePage();
+    return HomePage(
+      email: companyEmailTextController,
+      password: companyPasswordTextController,
+    );
   }
 
 // getRestaurantList() async {
@@ -95,6 +101,4 @@ class LoginRepository {
 }
 
 // var result = await db.rawQuery('SELECT * FROM my_table WHERE email=?', ['email']);
-//  ei query dile akta row er data paben. data gula hocche je email disen oi email er user er. er por oi row er email and password app a input dewa email and password er match korben. match hole log in hobe
-//  query te je email diben oi email ta hobe app a input dewa email
-//  db.rawQuery('SELECT * FROM my_table WHERE email_column_name=?', ['user_email']);
+

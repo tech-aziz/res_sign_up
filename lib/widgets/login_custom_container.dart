@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../global/styles.dart';
+import '../screens/home_page.dart';
 import '../screens/login.dart';
+import '../screens/login_repository.dart';
 import '../screens/sign_up_repository.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
@@ -14,17 +16,15 @@ import '../utils/constants.dart';
 import '../utils/snack_messages.dart';
 import 'custom_size.dart';
 
-Widget signUpCustomContainer({
-  required TextEditingController companyNameTextController,
-  required TextEditingController companyAddressTextController,
-  required TextEditingController companyPhoneTextController,
+Widget signInCustomContainer({
   required TextEditingController companyEmailTextController,
   required TextEditingController companyPasswordTextController,
-  required TextEditingController companyConfirmPasswordTextController,
   required GlobalKey<FormState> formKey,
 }) {
-  SignUpRepository signUp = SignUpRepository();
-  String name, address, phone, email, password, confirmPassword;
+  LoginRepository signIn = LoginRepository(
+      companyEmailTextController: companyEmailTextController.text,
+      companyPasswordTextController: companyPasswordTextController.text);
+  String email, password;
 
   return Padding(
     padding: EdgeInsets.only(
@@ -89,117 +89,8 @@ Widget signUpCustomContainer({
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: TextFormField(
-                              onChanged: (String value) {},
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter restaurant name';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) {
-                                name = value!;
-                              },
-                              controller: companyNameTextController,
-                              keyboardType: TextInputType.name,
-                              // maxLength: 30,
-                              decoration: InputDecoration(
-                                labelText: 'Restaurant Name',
-                                prefixIcon: const Icon(Icons.keyboard),
-                                enabledBorder: Style.inputBorder(),
-                                focusedBorder: Style.focusBorder(),
-                              ),
-                              style: Style.largeInputText(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: TextFormField(
-                              controller: companyAddressTextController,
-                              keyboardType: TextInputType.streetAddress,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter address';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) {
-                                address = value!;
-                              },
-                              // maxLength: 160,
-                              minLines: 1,
-                              maxLines: 2,
-                              decoration: InputDecoration(
-                                labelText: 'Address',
-                                prefixIcon: const Icon(Icons.location_on),
-                                enabledBorder: Style.inputBorder(),
-                                focusedBorder: Style.focusBorder(),
-                              ),
-                              style: Style.largeInputText(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: TextFormField(
-                              controller: companyPhoneTextController,
-                              keyboardType: TextInputType.phone,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter phone no ';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) {
-                                phone = value!;
-                              },
-                              // maxLength: 11,
-                              decoration: InputDecoration(
-                                labelText: 'Phone Number',
-                                prefixIcon: const Icon(Icons.phone),
-                                enabledBorder: Style.inputBorder(),
-                                focusedBorder: Style.focusBorder(),
-                              ),
-                              style: Style.largeInputText(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: TextFormField(
                               controller: companyEmailTextController,
                               keyboardType: TextInputType.emailAddress,
-                              // maxLength: 50,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Please Enter a email';
@@ -214,6 +105,7 @@ Widget signUpCustomContainer({
                               onSaved: (value) {
                                 email = value!;
                               },
+                              // maxLength: 50,
                               decoration: InputDecoration(
                                 labelText: 'Email',
                                 prefixIcon: const Icon(Icons.mail),
@@ -264,50 +156,6 @@ Widget signUpCustomContainer({
                     SizedBox(
                       height: 30.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: TextFormField(
-                              controller: companyConfirmPasswordTextController,
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText: true,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please re-enter password';
-                                }
-                                print(companyPasswordTextController.text);
-
-                                print(
-                                    companyConfirmPasswordTextController.text);
-
-                                if (companyPasswordTextController.text !=
-                                    companyConfirmPasswordTextController.text) {
-                                  return "Password does not match";
-                                }
-                                return null;
-                              },
-                              onSaved: (value) {
-                                confirmPassword = value!;
-                              },
-                              // maxLength: 50,
-                              decoration: InputDecoration(
-                                labelText: 'Confirm Password',
-                                prefixIcon: const Icon(Icons.lock),
-                                enabledBorder: Style.inputBorder(),
-                                focusedBorder: Style.focusBorder(),
-                              ),
-                              style: Style.largeInputText(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
                     SizedBox(
                       height: ScreenUtil().orientation == Orientation.landscape
                           ? AppServices.getDeviceType() == DeviceType.phone
@@ -320,80 +168,21 @@ Widget signUpCustomContainer({
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: ColorHelper.secondaryOrangeColor),
-
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            signUp.createRestaurant(
-                                companyNameTextController.text,
-                                companyPhoneTextController.text,
-                                companyAddressTextController.text,
-                                companyEmailTextController.text,
-                                companyPasswordTextController.text);
-                            print('sign up successfully done');
-                            SnackMessage.showSuccess(
-                                'Sign up successfully done');
-                            Get.to(() => const LoginScreen());
+                            signIn.createLogin(
+                              companyEmailTextController.text,
+                              companyPasswordTextController.text,
+                            );
                             FocusManager.instance.primaryFocus?.unfocus();
 
                             //clear filed
-                            companyNameTextController.clear();
-                            companyPhoneTextController.clear();
-                            companyAddressTextController.clear();
                             companyEmailTextController.clear();
                             companyPasswordTextController.clear();
-                            companyConfirmPasswordTextController.clear();
-
-                            return;
-                          } else {
-                            print("UnSuccessfull");
-                            SnackMessage.showError('Sign up unsuccessfull');
                           }
                         },
-
-                        // onPressed: () {
-                        //   if (companyNameTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Name is required');
-                        //   }
-                        //   if (companyPhoneTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Phone is required');
-                        //   }
-                        //   if (companyAddressTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Address is required');
-                        //   }
-                        //   if (companyEmailTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Email is required');
-                        //   }
-                        //   if (companyPasswordTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Password is required');
-                        //   } else {
-                        //     signUp.createRestaurant(
-                        //         companyNameTextController.text,
-                        //         companyPhoneTextController.text,
-                        //         companyAddressTextController.text,
-                        //         companyEmailTextController.text,
-                        //         companyPasswordTextController.text);
-                        //     print('sign up successfully done');
-                        //     SnackMessage.showSuccess('Sign up successfully done');
-                        //     Get.to(() => const LoginScreen());
-                        //     FocusManager.instance.primaryFocus?.unfocus();
-                        //
-                        //     //clear filed
-                        //     companyNameTextController.clear();
-                        //     companyPhoneTextController.clear();
-                        //     companyAddressTextController.clear();
-                        //     companyEmailTextController.clear();
-                        //     companyPasswordTextController.clear();
-                        //     companyConfirmPasswordTextController.clear();
-                        //   }
-                        // },
-
                         child: Text(
-                          'Create Account',
+                          'Sign in',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: Constants.largeFontSizeCreateAccount),
@@ -412,17 +201,16 @@ Widget signUpCustomContainer({
                             TextSpan(
                               children: [
                                 TextSpan(
-                                    text: 'Have an account?',
+                                    text: 'Have\'t an account?',
                                     style: Style.largeInputText()),
                                 TextSpan(
-                                    text: ' Sign in',
+                                    text: ' Sign up',
                                     style: const TextStyle(
                                         color: Colors.amber,
                                         fontWeight: FontWeight.bold),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        print('Login Text Clicked');
-                                        Get.to(() => const LoginScreen());
+                                        Get.back();
                                       }),
                               ],
                             ),
@@ -494,17 +282,15 @@ Widget signUpCustomContainer({
                     // Navigator.of(context).pop();
                   },
                   child: const Image(
-                    image: ResizeImage(
-                        AssetImage('assets/images/camera-plus-svgrepo-com.png'),
-                        width: 65,
-                        height: 65),
+                    image: ResizeImage(AssetImage('assets/images/person.png'),
+                        width: 60, height: 60),
                   ),
                 )))
       ],
     ),
   );
 }
-
+// vai dekhechen? hmm funcional bisoy gula dekhachi vai wait...
 // double customPaddingSize() {
 //   final screenOrientation = ScreenUtil().orientation;
 //   final deviceType = AppServices.getDeviceType();
