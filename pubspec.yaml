@@ -40,6 +40,7 @@ dependencies:
   sqflite_migration: ^0.3.0
   path_provider: ^2.0.12
   get: ^4.6.5
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:

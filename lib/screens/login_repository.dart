@@ -9,10 +9,12 @@ import '../model/base_response.dart';
 import '../model/sign_up_model.dart';
 import '../utils/snack_messages.dart';
 
+
 class LoginRepository {
   Database? _database;
   String? companyEmailTextController;
   String? companyPasswordTextController;
+
   LoginRepository(
       {initDatabase,
       required this.companyEmailTextController,

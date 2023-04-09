@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import '../main.dart';
 import '../utils/app_services.dart';
 import '../widgets/signup_custom_container.dart';
 import '../widgets/custom_size.dart';
+import 'package:get_storage/get_storage.dart';
+
+import 'home_page.dart';
+import 'login.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -12,6 +18,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final userData = GetStorage();
+
   final TextEditingController _companyNameTextController =
       TextEditingController();
   final TextEditingController _companyAddressTextController =
@@ -35,6 +43,17 @@ class _SignUpState extends State<SignUp> {
     _companyPasswordTextController.dispose();
     _companyConfirmPasswordTextController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userData.writeIfNull('isLogged', false);
+
+    Future.delayed(Duration.zero, () {
+      checkiflogged();
+    });
   }
 
   @override
@@ -103,5 +122,11 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  void checkiflogged() {
+    userData.read('isLogged')
+        ? Get.offAll(HomePage())
+        : Get.offAll(const SignUp());
   }
 }

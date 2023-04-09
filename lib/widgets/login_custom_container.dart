@@ -15,6 +15,7 @@ import '../utils/color_helper.dart';
 import '../utils/constants.dart';
 import '../utils/snack_messages.dart';
 import 'custom_size.dart';
+import 'package:get_storage/get_storage.dart';
 
 Widget signInCustomContainer({
   required TextEditingController companyEmailTextController,
@@ -25,6 +26,7 @@ Widget signInCustomContainer({
       companyEmailTextController: companyEmailTextController.text,
       companyPasswordTextController: companyPasswordTextController.text);
   String email, password;
+  final userData = GetStorage();
 
   return Padding(
     padding: EdgeInsets.only(
@@ -170,10 +172,16 @@ Widget signInCustomContainer({
                             backgroundColor: ColorHelper.secondaryOrangeColor),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
+
+                            userData.write('isLogged', true);
+                            userData.write('email', companyEmailTextController.text);
+                            userData.write('password', companyPasswordTextController.text);
+
                             signIn.createLogin(
                               companyEmailTextController.text,
                               companyPasswordTextController.text,
                             );
+
                             FocusManager.instance.primaryFocus?.unfocus();
 
                             //clear filed

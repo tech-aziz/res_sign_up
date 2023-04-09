@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
 import '../widgets/login_custom_container.dart';
 import '../widgets/signup_custom_container.dart';
 import '../widgets/custom_size.dart';
@@ -16,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _companyEmailTextController = TextEditingController();
   final TextEditingController _companyPasswordTextController = TextEditingController();
   static final _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
