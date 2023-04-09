@@ -5,7 +5,7 @@ import '../main.dart';
 import '../utils/app_services.dart';
 import '../widgets/signup_custom_container.dart';
 import '../widgets/custom_size.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 import 'home_page.dart';
 import 'login.dart';
@@ -18,20 +18,13 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final userData = GetStorage();
 
-  final TextEditingController _companyNameTextController =
-      TextEditingController();
-  final TextEditingController _companyAddressTextController =
-      TextEditingController();
-  final TextEditingController _companyPhoneTextController =
-      TextEditingController();
-  final TextEditingController _companyEmailTextController =
-      TextEditingController();
-  final TextEditingController _companyPasswordTextController =
-      TextEditingController();
-  final TextEditingController _companyConfirmPasswordTextController =
-      TextEditingController();
+  final TextEditingController _companyNameTextController = TextEditingController();
+  final TextEditingController _companyAddressTextController = TextEditingController();
+  final TextEditingController _companyPhoneTextController =  TextEditingController();
+  final TextEditingController _companyEmailTextController = TextEditingController();
+  final TextEditingController _companyPasswordTextController = TextEditingController();
+  final TextEditingController _companyConfirmPasswordTextController = TextEditingController();
   static final _formKey = GlobalKey<FormState>();
 
   @override
@@ -45,16 +38,16 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    userData.writeIfNull('isLogged', false);
-
-    Future.delayed(Duration.zero, () {
-      checkiflogged();
-    });
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   userData.writeIfNull('isLogged', false);
+  //
+  //   Future.delayed(Duration.zero, () {
+  //     checkiflogged();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +117,9 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  void checkiflogged() {
-    userData.read('isLogged')
-        ? Get.offAll(HomePage())
-        : Get.offAll(const SignUp());
-  }
+  // void checkiflogged() {
+  //   userData.read('isLogged')
+  //       ? Get.offAll(HomePage())
+  //       : Get.offAll(const SignUp());
+  // }
 }

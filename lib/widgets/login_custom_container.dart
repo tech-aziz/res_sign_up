@@ -9,6 +9,7 @@ import '../global/styles.dart';
 import '../screens/home_page.dart';
 import '../screens/login.dart';
 import '../screens/login_repository.dart';
+import '../screens/sign_up.dart';
 import '../screens/sign_up_repository.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
@@ -17,16 +18,17 @@ import '../utils/snack_messages.dart';
 import 'custom_size.dart';
 import 'package:get_storage/get_storage.dart';
 
-Widget signInCustomContainer({
-  required TextEditingController companyEmailTextController,
-  required TextEditingController companyPasswordTextController,
-  required GlobalKey<FormState> formKey,
-}) {
+Widget signInCustomContainer(
+    {required TextEditingController companyEmailTextController,
+    required TextEditingController companyPasswordTextController,
+    required GlobalKey<FormState> formKey,
+    }) {
   LoginRepository signIn = LoginRepository(
       companyEmailTextController: companyEmailTextController.text,
-      companyPasswordTextController: companyPasswordTextController.text);
+      companyPasswordTextController: companyPasswordTextController.text,
+
+  );
   String email, password;
-  final userData = GetStorage();
 
   return Padding(
     padding: EdgeInsets.only(
@@ -173,10 +175,6 @@ Widget signInCustomContainer({
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
 
-                            userData.write('isLogged', true);
-                            userData.write('email', companyEmailTextController.text);
-                            userData.write('password', companyPasswordTextController.text);
-
                             signIn.createLogin(
                               companyEmailTextController.text,
                               companyPasswordTextController.text,
@@ -218,7 +216,7 @@ Widget signInCustomContainer({
                                         fontWeight: FontWeight.bold),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        Get.back();
+                                        Get.to(const SignUp());
                                       }),
                               ],
                             ),

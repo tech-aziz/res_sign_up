@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'screens/home_page.dart';
 import 'screens/login.dart';
 import 'screens/sign_up.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.orange,
           ),
-          home: const SignUp(),
+          home: const HomePage(),
         );
       },
       designSize: const Size(800, 1280),
@@ -35,39 +36,39 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class HomePage extends StatefulWidget {
-//   const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-//   @override
-//   State<HomePage> createState() => _HomePageState();
-// }
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
-// class _HomePageState extends State<HomePage> {
-//   final userData = GetStorage();
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     userData.writeIfNull('isLogged', false);
+class _HomePageState extends State<HomePage> {
+  final userData = GetStorage();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userData.writeIfNull('isLogged', false);
 
-//     Future.delayed(Duration.zero, () {
-//       checkiflogged();
-//     });
-//   }
+    Future.delayed(Duration.zero, () {
+      checkiflogged();
+    });
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Scaffold(
-//       body: SafeArea(
-//           child: Center(
-//         child: CircularProgressIndicator(),
-//       )),
-//     );
-//   }
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(
+          child: Center(
+        child: CircularProgressIndicator(),
+      )),
+    );
+  }
 
-//   void checkiflogged() {
-//     userData.read('isLogged')
-//         ? Get.offAll(const HomePage())
-//         : Get.offAll(const LoginScreen());
-//   }
-// }
+  void checkiflogged() {
+    userData.read('isLogged')
+        ? Get.offAll(HomePages())
+        : Get.offAll(const LoginScreen());
+  }
+}

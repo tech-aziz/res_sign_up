@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
+import 'package:get_storage/get_storage.dart';
 import '../widgets/login_custom_container.dart';
 import '../widgets/signup_custom_container.dart';
 import '../widgets/custom_size.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,6 +17,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _companyEmailTextController = TextEditingController();
   final TextEditingController _companyPasswordTextController = TextEditingController();
   static final _formKey = GlobalKey<FormState>();
+
+
 
 
   @override
@@ -70,6 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: signInCustomContainer(
                         companyEmailTextController: _companyEmailTextController,
                         companyPasswordTextController: _companyPasswordTextController,
+
                         formKey: _formKey
                         )),
               ),

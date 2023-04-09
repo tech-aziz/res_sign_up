@@ -5,17 +5,18 @@ import 'package:get/get.dart';
 
 import 'login.dart';
 
-class HomePage extends StatefulWidget {
+class HomePages extends StatefulWidget {
   String? email;
   String? password;
+  final userData = GetStorage();
 
-  HomePage({super.key, this.email, this.password});
+  HomePages({super.key, this.email, this.password});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePages> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePages> {
   @override
   Widget build(BuildContext context) {
 
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                             'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29uYXxlbnwwfHwwfHw%3D&w=1000&q=80',
                           ),
                         ),
-                        title: Text("Email: ${userData.read('email')}}",
+                        title: Text("Email: ${userData.read('email')}",
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                         subtitle: Text(
