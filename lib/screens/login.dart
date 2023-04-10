@@ -18,9 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _companyPasswordTextController = TextEditingController();
   static final _formKey = GlobalKey<FormState>();
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
