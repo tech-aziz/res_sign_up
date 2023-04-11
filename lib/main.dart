@@ -45,6 +45,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final userData = GetStorage();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     userData.writeIfNull('isLogged', false);
 
     Future.delayed(Duration.zero, () {
-      checkiflogged();
+      checkIfLogged();
     });
   }
 
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void checkiflogged() {
+  void checkIfLogged() {
     userData.read('isLogged')
         ? Get.offAll(HomePages())
         : Get.offAll(const LoginScreen());

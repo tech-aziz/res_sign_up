@@ -113,6 +113,7 @@ Widget signInCustomContainer(
                               decoration: InputDecoration(
                                 labelText: 'Email',
                                 prefixIcon: const Icon(Icons.mail),
+                                // enabledBorder: OutlineInputBorder(),
                                 enabledBorder: Style.inputBorder(),
                                 focusedBorder: Style.focusBorder(),
                               ),

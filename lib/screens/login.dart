@@ -18,6 +18,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _companyPasswordTextController = TextEditingController();
   static final _formKey = GlobalKey<FormState>();
 
+
+  @override
+  void dispose() {
+    _companyEmailTextController.dispose();
+    _companyPasswordTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

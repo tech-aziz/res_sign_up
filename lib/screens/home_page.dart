@@ -8,21 +8,24 @@ import 'login.dart';
 class HomePages extends StatefulWidget {
   String? email;
   String? password;
-  final userData = GetStorage();
 
-  HomePages({super.key, this.email, this.password});
+  HomePages({
+    super.key,
+    this.email,
+    this.password,
+  });
 
   @override
   State<HomePages> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePages> {
+  final userData = GetStorage();
+
   @override
   Widget build(BuildContext context) {
-
     print('Home page is loading');
-    final userData = GetStorage();
-    
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -50,11 +53,11 @@ class _HomePageState extends State<HomePages> {
                         ),
                         title: Text("Email: ${userData.read('email')}",
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
+                                fontSize: 15, fontWeight: FontWeight.bold)),
                         subtitle: Text(
                           "Password: ${userData.read('password')}",
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         trailing: InkWell(
                             onTap: () {
