@@ -51,7 +51,7 @@ class LoginRepository {
         userData.write('isLogged', true);
         userData.write('email', email);
         userData.write('password', password);
-        Get.offAll(() => homePage());
+        Get.off(() => homePage());
       } else {
         print('Log in failed');
         SnackMessage.showWarning(' Email & Password not correct');

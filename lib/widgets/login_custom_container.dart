@@ -1,22 +1,14 @@
-import 'dart:math';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../global/styles.dart';
-import '../screens/home_page.dart';
-import '../screens/login.dart';
 import '../screens/login_repository.dart';
 import '../screens/sign_up.dart';
-import '../screens/sign_up_repository.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
 import '../utils/constants.dart';
-import '../utils/snack_messages.dart';
 import 'custom_size.dart';
-import 'package:get_storage/get_storage.dart';
 
 Widget signInCustomContainer(
     {required TextEditingController companyEmailTextController,
@@ -270,7 +262,7 @@ Widget signInCustomContainer(
                 //     portDesktop: 40.h,
                 //     landPhone: 250.h,
                 //     landTablet: 110.h,
-                //     landDestop: 160.h),
+                //     landDesktop: 160.h),
                 // width: 100.w,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -297,7 +289,7 @@ Widget signInCustomContainer(
     ),
   );
 }
-// vai dekhechen? hmm funcional bisoy gula dekhachi vai wait...
+
 // double customPaddingSize() {
 //   final screenOrientation = ScreenUtil().orientation;
 //   final deviceType = AppServices.getDeviceType();
