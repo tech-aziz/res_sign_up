@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../global/image_picker_bottom_sheet.dart';
 import '../global/styles.dart';
 import '../screens/login.dart';
 import '../screens/sign_up_repository.dart';
@@ -165,11 +166,13 @@ Widget signUpCustomContainer({
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ],
+                              // maxLength: 11,
                               validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter phone no ';
+                                if (value!.length != 11) {
+                                  return 'Mobile Number must be of 11 digit';
+                                } else {
+                                  return null;
                                 }
-                                return null;
                               },
                               onSaved: (value) {
                                 phone = value!;
@@ -330,8 +333,7 @@ Widget signUpCustomContainer({
                                 companyEmailTextController.text,
                                 companyPasswordTextController.text);
                             print('sign up successfully done');
-                            SnackMessage.showSuccess(
-                                'Sign up successfully done');
+                            SnackMessage.showSuccess('Sign up successfully!');
                             Get.to(() => const LoginScreen());
                             FocusManager.instance.primaryFocus?.unfocus();
 
@@ -345,8 +347,8 @@ Widget signUpCustomContainer({
 
                             return;
                           } else {
-                            print("UnSuccessfull");
-                            SnackMessage.showError('Sign up unsuccessfull');
+                            print("UnSuccessful");
+                            SnackMessage.showError('All field required!');
                           }
                         },
 
@@ -492,6 +494,9 @@ Widget signUpCustomContainer({
                 child: InkWell(
                   onTap: () {
                     // Navigator.of(context).pop();
+                    // ImagePick.imagePickerOptionWithReturn;
+                    // print('image is clicked');
+                    Get.snackbar('photo', 'Take image');
                   },
                   child: const Image(
                     image: ResizeImage(
