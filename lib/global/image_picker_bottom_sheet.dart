@@ -7,6 +7,7 @@ import '../utils/snack_messages.dart';
 
 class ImagePick {
  static void imagePickerOption() {
+   //apni dekhen ekthon.
     Get.bottomSheet(
       SingleChildScrollView(
         child: ClipRRect(

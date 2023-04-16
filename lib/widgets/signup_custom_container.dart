@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -494,9 +494,10 @@ Widget signUpCustomContainer({
                 child: InkWell(
                   onTap: () {
                     // Navigator.of(context).pop();
-                    // ImagePick.imagePickerOptionWithReturn;
-                    // print('image is clicked');
-                    Get.snackbar('photo', 'Take image');
+                    log('clicked');
+                    ImagePick.imagePickerOption();
+                    print('image is clicked');
+                    // Get.snackbar('photo', 'Take image');
                   },
                   child: const Image(
                     image: ResizeImage(
@@ -509,7 +510,6 @@ Widget signUpCustomContainer({
     ),
   );
 }
-
 // double customPaddingSize() {
 //   final screenOrientation = ScreenUtil().orientation;
 //   final deviceType = AppServices.getDeviceType();
