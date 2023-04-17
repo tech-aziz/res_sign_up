@@ -1,10 +1,12 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../global/image_picker_bottom_sheet.dart';
 import '../global/image_picker_bottom_sheet.dart';
 import '../global/styles.dart';
 import '../screens/login.dart';
@@ -26,6 +28,8 @@ Widget signUpCustomContainer({
 }) {
   SignUpRepository signUp = SignUpRepository();
   String name, address, phone, email, password, confirmPassword;
+  // ImagePick imagePick = ImagePick();
+  var actualImage = ImagePick.seletedImagePath;
 
   return Padding(
     padding: EdgeInsets.only(
@@ -443,7 +447,15 @@ Widget signUpCustomContainer({
         ),
         Positioned(
             top: -60,
-            child: Container(
+            child: InkWell(
+              onTap: () {
+                // Navigator.of(context).pop();
+                log('clicked');
+                ImagePick.imagePickerOption();
+                // print('image is clicked');
+                // Get.snackbar('photo', 'Take image');
+              },
+              child: Container(
                 height: ScreenUtil().orientation == Orientation.portrait &&
                         AppServices.getDeviceType() == DeviceType.phone
                     ? 140.h
@@ -491,21 +503,27 @@ Widget signUpCustomContainer({
                     ),
                   ],
                 ),
-                child: InkWell(
-                  onTap: () {
-                    // Navigator.of(context).pop();
-                    log('clicked');
-                    ImagePick.imagePickerOption();
-                    print('image is clicked');
-                    // Get.snackbar('photo', 'Take image');
-                  },
-                  child: const Image(
-                    image: ResizeImage(
-                        AssetImage('assets/images/camera-plus-svgrepo-com.png'),
-                        width: 65,
-                        height: 65),
-                  ),
-                )))
+                child: actualImage == ''
+                    ? const Image(
+                        image: ResizeImage(
+                            AssetImage(
+                                'assets/images/camera-plus-svgrepo-com.png'),
+                            width: 65,
+                            height: 65))
+                    : CircleAvatar(
+                      child: Image.file(
+                          File(actualImage),
+                          fit: BoxFit.cover,
+                        ),
+                    ),
+                // child: const Image(
+                //   image: ResizeImage(
+                //       AssetImage('assets/images/camera-plus-svgrepo-com.png'),
+                //       width: 65,
+                //       height: 65),
+                // )
+              ),
+            ))
       ],
     ),
   );
