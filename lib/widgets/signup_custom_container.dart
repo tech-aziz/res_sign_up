@@ -29,7 +29,7 @@ Widget signUpCustomContainer({
   SignUpRepository signUp = SignUpRepository();
   String name, address, phone, email, password, confirmPassword;
   // ImagePick imagePick = ImagePick();
-  var actualImage = ImagePick.seletedImagePath;
+  // var actualImage = ImagePick.seletedImagePath;
 
   return Padding(
     padding: EdgeInsets.only(
@@ -451,7 +451,8 @@ Widget signUpCustomContainer({
               onTap: () {
                 // Navigator.of(context).pop();
                 log('clicked');
-                ImagePick.imagePickerOption();
+                // ImagePick.imagePickerOption();
+                ImagePick.imagePickerOptionWithReturn();
                 // print('image is clicked');
                 // Get.snackbar('photo', 'Take image');
               },
@@ -503,25 +504,27 @@ Widget signUpCustomContainer({
                     ),
                   ],
                 ),
-                child: actualImage == ''
-                    ? const Image(
-                        image: ResizeImage(
-                            AssetImage(
-                                'assets/images/camera-plus-svgrepo-com.png'),
-                            width: 65,
-                            height: 65))
-                    : CircleAvatar(
-                      child: Image.file(
-                          File(actualImage),
-                          fit: BoxFit.cover,
-                        ),
-                    ),
-                // child: const Image(
-                //   image: ResizeImage(
-                //       AssetImage('assets/images/camera-plus-svgrepo-com.png'),
-                //       width: 65,
-                //       height: 65),
-                // )
+                // child: actualImage == ''
+                //     ? const Image(
+                //         image: ResizeImage(
+                //             AssetImage(
+                //                 'assets/images/camera-plus-svgrepo-com.png'),
+                //             width: 65,
+                //             height: 65))
+                //     : CircleAvatar(
+                //       child: Image.file(
+                //           File(actualImage),
+                //           fit: BoxFit.cover,
+                //         ),
+                //     ),
+                
+                child: const Image(
+                  image: ResizeImage(
+                      AssetImage('assets/images/camera-plus-svgrepo-com.png'),
+                      width: 65,
+                      height: 65),
+                )
+
               ),
             ))
       ],

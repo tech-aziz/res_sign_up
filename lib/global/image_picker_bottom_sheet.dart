@@ -9,7 +9,6 @@ import '../utils/snack_messages.dart';
 class ImagePick {
   static var seletedImagePath = '';
   static void imagePickerOption() {
-    
     Get.bottomSheet(
       SingleChildScrollView(
         child: ClipRRect(
@@ -49,12 +48,11 @@ class ImagePick {
                                   onTap: () async {
                                     seletedImagePath =
                                         await selectImageFromCamera();
-                                        
+
                                     print('Image_Path:-');
                                     print('Image_Path:-$seletedImagePath');
                                     Get.back();
                                     if (seletedImagePath != '') {
-
                                     } else {
                                       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                       //   content: Text("No Image Selected !"),
@@ -98,7 +96,7 @@ class ImagePick {
                                   onTap: () async {
                                     seletedImagePath =
                                         await selectImageFromGallery();
-                                        
+
                                     print(seletedImagePath);
                                     Get.back();
                                   },
@@ -264,7 +262,7 @@ class ImagePick {
                         children: [
                           InkWell(
                             onTap: () async {
-                              // await imagePickFromCamera();
+                              selectImageFromCamera();
                               Get.back();
                             },
                             child: Container(
@@ -298,7 +296,7 @@ class ImagePick {
                         children: [
                           InkWell(
                             onTap: () async {
-                              // pickImageFromGallery();
+                              selectImageFromGallery();
                               Get.back();
                             },
                             child: Container(
