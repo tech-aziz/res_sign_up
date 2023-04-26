@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:res_sign_up/screens/home_page.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../database/database_info.dart';
 import '../database/init_database.dart';
 import '../model/base_response.dart';
-import '../model/sign_up_model.dart';
 import '../utils/snack_messages.dart';
 
 class LoginRepository {
@@ -64,49 +62,10 @@ class LoginRepository {
     }
   }
 
-  //vai validation ta korte hobe ekhon jemon dekhachi ami wait
-// mane faka falue o insert hocce eita korte hobe ekhon
-
   Widget homePage() {
     return HomePages(
       email: companyEmailTextController.toString(),
       password: companyPasswordTextController.toString(),
     );
   }
-
-// getRestaurantList() async {
-//   if (_database == null || !_database!.isOpen) {
-//     _database = await InitDatabase().open();
-//   }
-//
-//   try {
-//     var query = 'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo};';
-//
-//     var data = await _database!.rawQuery(query);
-//
-//     var restaurantList = List<SignUpModel>.empty(growable: true);
-//     if (data.isNotEmpty) {
-//       for (int i = 0; i < data.length; i++) {
-//         var map = {};
-//         data[i].forEach((key, value) => map[key] = value);
-//
-//         restaurantList.add(SignUpModel(
-//             id: map[DatabaseInfo.columnRestaurantId],
-//             restaurantName: map[DatabaseInfo.columnRestaurantName],
-//             restaurantAddress: map[DatabaseInfo.columnRestaurantAddress],
-//             restaurantEmail: map[DatabaseInfo.columnRestaurantEmail],
-//             restaurantMobileNumber:
-//                 map[DatabaseInfo.columnRestaurantMobileNumber],
-//             restaurantPassword: map[DatabaseInfo.columnRestaurantPassword]));
-//       }
-//     }
-//
-//     return BaseResponse(true, 'Restaurant List Loaded', restaurantList);
-//   } catch (exception) {
-//     debugPrint(exception.toString());
-//     return BaseResponse(false, 'Database Exception', null);
-//   }
-// }
 }
-
-// var result = await db.rawQuery('SELECT * FROM my_table WHERE email=?', ['email']);

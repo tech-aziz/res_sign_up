@@ -1,13 +1,8 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../global/image_picker_bottom_sheet.dart';
-import '../global/image_picker_bottom_sheet.dart';
 import '../global/styles.dart';
 import '../screens/login.dart';
 import '../screens/sign_up_repository.dart';
@@ -55,6 +50,7 @@ Widget signUpCustomContainer({
           : 300.h,
     ),
     child: Stack(
+      // ei stack er under e position neya...sekhane...ektow dekhen...
       clipBehavior: Clip.none,
       alignment: Alignment.topCenter,
       children: [
@@ -327,7 +323,6 @@ Widget signUpCustomContainer({
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: ColorHelper.secondaryOrangeColor),
-
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             signUp.createRestaurant(
@@ -355,49 +350,6 @@ Widget signUpCustomContainer({
                             SnackMessage.showError('All field required!');
                           }
                         },
-
-                        // onPressed: () {
-                        //   if (companyNameTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Name is required');
-                        //   }
-                        //   if (companyPhoneTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Phone is required');
-                        //   }
-                        //   if (companyAddressTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Address is required');
-                        //   }
-                        //   if (companyEmailTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Email is required');
-                        //   }
-                        //   if (companyPasswordTextController.text.isEmpty) {
-                        //     //show snackbar
-                        //     SnackMessage.showSuccess('Password is required');
-                        //   } else {
-                        //     signUp.createRestaurant(
-                        //         companyNameTextController.text,
-                        //         companyPhoneTextController.text,
-                        //         companyAddressTextController.text,
-                        //         companyEmailTextController.text,
-                        //         companyPasswordTextController.text);
-                        //     print('sign up successfully done');
-                        //     SnackMessage.showSuccess('Sign up successfully done');
-                        //     Get.to(() => const LoginScreen());
-                        //     FocusManager.instance.primaryFocus?.unfocus();
-                        //
-                        //     //clear filed
-                        //     companyNameTextController.clear();
-                        //     companyPhoneTextController.clear();
-                        //     companyAddressTextController.clear();
-                        //     companyEmailTextController.clear();
-                        //     companyPasswordTextController.clear();
-                        //     companyConfirmPasswordTextController.clear();
-                        //   }
-                        // },
-
                         child: Text(
                           'Create Account',
                           style: TextStyle(
@@ -445,117 +397,7 @@ Widget signUpCustomContainer({
             ),
           ),
         ),
-        Positioned(
-            top: -60,
-            child: InkWell(
-              onTap: () {
-                // Navigator.of(context).pop();
-                log('clicked');
-                // ImagePick.imagePickerOption();
-                ImagePick.imagePickerOptionWithReturn();
-                // print('image is clicked');
-                // Get.snackbar('photo', 'Take image');
-              },
-              child: Container(
-                height: ScreenUtil().orientation == Orientation.portrait &&
-                        AppServices.getDeviceType() == DeviceType.phone
-                    ? 140.h
-                    : ScreenUtil().orientation == Orientation.portrait &&
-                            AppServices.getDeviceType() == DeviceType.tablet
-                        ? 150.h
-                        : ScreenUtil().orientation == Orientation.portrait &&
-                                AppServices.getDeviceType() ==
-                                    DeviceType.desktop
-                            ? 100.h
-                            : ScreenUtil().orientation ==
-                                        Orientation.landscape &&
-                                    AppServices.getDeviceType() ==
-                                        DeviceType.phone
-                                ? 300.h
-                                : ScreenUtil().orientation ==
-                                            Orientation.landscape &&
-                                        AppServices.getDeviceType() ==
-                                            DeviceType.tablet
-                                    ? 170.h
-                                    : ScreenUtil().orientation ==
-                                                Orientation.landscape &&
-                                            AppServices.getDeviceType() ==
-                                                DeviceType.desktop
-                                        ? 400.h
-                                        : 100.h,
-
-                // customSize(
-                //     portPhone: 140.h,
-                //     portTablet: 0.h,
-                //     portDesktop: 40.h,
-                //     landPhone: 250.h,
-                //     landTablet: 110.h,
-                //     landDestop: 160.h),
-                // width: 100.w,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: const Offset(0, 3),
-                      blurRadius: 7.r,
-                      spreadRadius: 5.r,
-                      color: Colors.grey.withOpacity(0.2),
-                    ),
-                  ],
-                ),
-                // child: actualImage == ''
-                //     ? const Image(
-                //         image: ResizeImage(
-                //             AssetImage(
-                //                 'assets/images/camera-plus-svgrepo-com.png'),
-                //             width: 65,
-                //             height: 65))
-                //     : CircleAvatar(
-                //       child: Image.file(
-                //           File(actualImage),
-                //           fit: BoxFit.cover,
-                //         ),
-                //     ),
-                
-                child: const Image(
-                  image: ResizeImage(
-                      AssetImage('assets/images/camera-plus-svgrepo-com.png'),
-                      width: 65,
-                      height: 65),
-                )
-
-              ),
-            ))
       ],
     ),
   );
 }
-// double customPaddingSize() {
-//   final screenOrientation = ScreenUtil().orientation;
-//   final deviceType = AppServices.getDeviceType();
-
-//   double paddingSize = 0;
-
-//   if (screenOrientation == Orientation.portrait) {
-//     if (deviceType == DeviceType.phone) {
-//       paddingSize = 55.h;
-//     } else if (deviceType == DeviceType.tablet) {
-//       paddingSize = 30.h;
-//     } else if (deviceType == DeviceType.desktop) {
-//       paddingSize = 20.h;
-//     }
-//   } else if (screenOrientation == Orientation.landscape) {
-//     if (deviceType == DeviceType.phone) {
-//       paddingSize = 125.h;
-//     } else if (deviceType == DeviceType.tablet) {
-//       paddingSize = 10.h;
-//     } else if (deviceType == DeviceType.desktop) {
-//       paddingSize = 160.h;
-//     }
-//   }
-
-//   return paddingSize;
-// }
-
-//To manage size for page orientation

@@ -4,4 +4,5 @@ class BaseResponse {
   String? message;
   dynamic data;
   BaseResponse(this.isSuccess, this.message, this.data);
+  
 }

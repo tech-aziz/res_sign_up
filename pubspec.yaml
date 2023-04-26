@@ -39,10 +39,12 @@ dependencies:
   sqflite: ^2.2.4+1
   sqflite_migration: ^0.3.0
   path_provider: ^2.0.12
+  # ask you for certain permission like camera & media permission
   permission_handler: ^10.2.0
   get: ^4.6.5
   get_storage: ^2.1.1
-  image_picker: ^0.8.7+2
+  #for allowing the image from camera & gallery
+  image_picker: ^0.8.7+2 
   camera: ^0.10.4
 
 dev_dependencies:

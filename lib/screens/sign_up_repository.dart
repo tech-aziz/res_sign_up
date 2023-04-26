@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../database/database_info.dart';
 import '../database/init_database.dart';
 import '../model/base_response.dart';
 import '../model/sign_up_model.dart';
-import '../utils/snack_messages.dart';
+
 
 class SignUpRepository {
   Database? _database;

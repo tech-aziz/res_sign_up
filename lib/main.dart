@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'screens/home_page.dart';
 import 'screens/login.dart';
-import 'screens/sign_up.dart';
 
 void main() async {
   await GetStorage.init();

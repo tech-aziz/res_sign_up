@@ -1,14 +1,10 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import '../main.dart';
+import '../global/image_picker_bottom_sheet.dart';
 import '../utils/app_services.dart';
 import '../widgets/signup_custom_container.dart';
 import '../widgets/custom_size.dart';
-
-
-import 'home_page.dart';
-import 'login.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -18,13 +14,18 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-
-  final TextEditingController _companyNameTextController = TextEditingController();
-  final TextEditingController _companyAddressTextController = TextEditingController();
-  final TextEditingController _companyPhoneTextController =  TextEditingController();
-  final TextEditingController _companyEmailTextController = TextEditingController();
-  final TextEditingController _companyPasswordTextController = TextEditingController();
-  final TextEditingController _companyConfirmPasswordTextController = TextEditingController();
+  final TextEditingController _companyNameTextController =
+      TextEditingController();
+  final TextEditingController _companyAddressTextController =
+      TextEditingController();
+  final TextEditingController _companyPhoneTextController =
+      TextEditingController();
+  final TextEditingController _companyEmailTextController =
+      TextEditingController();
+  final TextEditingController _companyPasswordTextController =
+      TextEditingController();
+  final TextEditingController _companyConfirmPasswordTextController =
+      TextEditingController();
   static final _formKey = GlobalKey<FormState>();
 
   @override
@@ -38,32 +39,15 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   userData.writeIfNull('isLogged', false);
-  //
-  //   Future.delayed(Duration.zero, () {
-  //     checkiflogged();
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         body: Stack(
+          alignment: Alignment.topCenter,
           children: [
             Container(
-              // height: 300,
-              // height: ScreenUtil().orientation == Orientation.landscape
-              //     ? AppServices.getDeviceType() == DeviceType.phone
-              //         ? 300.h
-              //         : 500.h
-              //     : 225.h,
-
               height: CustomSize.customSize(
                   portPhone: 350.h,
                   portTablet: 320.h,
@@ -110,16 +94,68 @@ class _SignUpState extends State<SignUp> {
                       formKey: _formKey),
                 ),
               ),
-            )
+            ),
+            Positioned(
+                top: 100,
+                child: GestureDetector(
+                  onTap: ()async {
+                    log('clicked');
+                    // ImagePick.imagePickerOption();
+                    ImagePick.imagePickerOptionWithReturn();
+                  },
+                  child: Container(
+                      height: ScreenUtil().orientation ==
+                                  Orientation.portrait &&
+                              AppServices.getDeviceType() == DeviceType.phone
+                          ? 140.h
+                          : ScreenUtil().orientation == Orientation.portrait &&
+                                  AppServices.getDeviceType() ==
+                                      DeviceType.tablet
+                              ? 150.h
+                              : ScreenUtil().orientation ==
+                                          Orientation.portrait &&
+                                      AppServices.getDeviceType() ==
+                                          DeviceType.desktop
+                                  ? 100.h
+                                  : ScreenUtil().orientation ==
+                                              Orientation.landscape &&
+                                          AppServices.getDeviceType() ==
+                                              DeviceType.phone
+                                      ? 300.h
+                                      : ScreenUtil().orientation ==
+                                                  Orientation.landscape &&
+                                              AppServices.getDeviceType() ==
+                                                  DeviceType.tablet
+                                          ? 170.h
+                                          : ScreenUtil().orientation ==
+                                                      Orientation.landscape &&
+                                                  AppServices.getDeviceType() ==
+                                                      DeviceType.desktop
+                                              ? 400.h
+                                              : 100.h,
+                      decoration: BoxDecoration(
+                        // color: Colors.white,
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(0, 3),
+                            blurRadius: 7.r,
+                            spreadRadius: 5.r,
+                            color: Colors.grey.withOpacity(0.2),
+                          ),
+                        ],
+                      ),
+                      child: const Image(
+                        image: ResizeImage(
+                            AssetImage(
+                                'assets/images/camera-plus-svgrepo-com.png'),
+                            width: 83,
+                            height: 83),
+                      )),
+                ))
           ],
         ),
       ),
     );
   }
-
-  // void checkiflogged() {
-  //   userData.read('isLogged')
-  //       ? Get.offAll(HomePage())
-  //       : Get.offAll(const SignUp());
-  // }
 }
