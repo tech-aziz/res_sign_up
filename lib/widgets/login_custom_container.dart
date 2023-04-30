@@ -7,7 +7,6 @@ import '../screens/login_repository.dart';
 import '../screens/sign_up.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
-import '../utils/constants.dart';
 import 'custom_size.dart';
 
 Widget signInCustomContainer(
@@ -182,9 +181,7 @@ Widget signInCustomContainer(
                         },
                         child: Text(
                           'Sign in',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Constants.largeFontSizeCreateAccount),
+                          style: Style.largeInputText(),
                         ),
                       ),
                     ),

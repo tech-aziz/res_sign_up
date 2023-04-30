@@ -8,7 +8,6 @@ import '../screens/login.dart';
 import '../screens/sign_up_repository.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
-import '../utils/constants.dart';
 import '../utils/snack_messages.dart';
 import 'custom_size.dart';
 
@@ -352,9 +351,8 @@ Widget signUpCustomContainer({
                         },
                         child: Text(
                           'Create Account',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Constants.largeFontSizeCreateAccount),
+                          style: Style.largeInputText(),
+                        
                         ),
                       ),
                     ),

@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import '../global/image_picker_bottom_sheet.dart';
 import '../utils/app_services.dart';
+import '../utils/color_helper.dart';
 import '../widgets/signup_custom_container.dart';
 import '../widgets/custom_size.dart';
 
@@ -178,17 +178,13 @@ class _SignUpState extends State<SignUp> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         body: Stack(
+          clipBehavior: Clip.none,
           alignment: Alignment.topCenter,
           children: [
             Container(
-              height: CustomSize.customSize(
-                  portPhone: 350.h,
-                  portTablet: 320.h,
-                  portDesktop: 10.h,
-                  landPhone: 560.h,
-                  landTablet: 400.h,
-                  landDestop: 160.h),
-              width: MediaQuery.of(context).size.width,
+              height: ScreenUtil().orientation == Orientation.portrait
+                  ? 300.w
+                  : 150.w, // width is not set yet.
               decoration: BoxDecoration(
                 color: Colors.orange,
                 borderRadius: BorderRadius.only(
@@ -205,107 +201,80 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Positioned(
-              child: SafeArea(
-                child: SizedBox(
-                  height: CustomSize.customSize(
-                      portPhone: 1450.h,
-                      portTablet: 1100.h,
-                      portDesktop: 0.h,
-                      landPhone: 1150.h,
-                      landTablet: 1150.h,
-                      landDestop: 0.h),
-                  child: signUpCustomContainer(
-                      companyNameTextController: _companyNameTextController,
-                      companyAddressTextController:
-                          _companyAddressTextController,
-                      companyEmailTextController: _companyEmailTextController,
-                      companyPhoneTextController: _companyPhoneTextController,
-                      companyPasswordTextController:
-                          _companyPasswordTextController,
-                      companyConfirmPasswordTextController:
-                          _companyConfirmPasswordTextController,
-                      formKey: _formKey),
-                ),
+              child: SizedBox(
+                height: ScreenUtil().orientation == Orientation.portrait
+                    ? ScreenUtil().screenHeight
+                    : ScreenUtil().screenHeight,
+                child: signUpCustomContainer(
+                    companyNameTextController: _companyNameTextController,
+                    companyAddressTextController: _companyAddressTextController,
+                    companyEmailTextController: _companyEmailTextController,
+                    companyPhoneTextController: _companyPhoneTextController,
+                    companyPasswordTextController:
+                        _companyPasswordTextController,
+                    companyConfirmPasswordTextController:
+                        _companyConfirmPasswordTextController,
+                    formKey: _formKey),
               ),
             ),
             Positioned(
-                top: 70,
+                // top: 70,
+                top: ScreenUtil().orientation == Orientation.portrait ? 70 : 50,
                 child: GestureDetector(
-                  onTap: () async {
-                    log('clicked');
-                    // ImagePick.imagePickerOption();
-                    imagePickerOptionWithReturn();
-                  },
-                  child: Container(
-                    height: ScreenUtil().orientation == Orientation.portrait &&
-                            AppServices.getDeviceType() == DeviceType.phone
-                        ? 140.h
-                        : ScreenUtil().orientation == Orientation.portrait &&
-                                AppServices.getDeviceType() == DeviceType.tablet
-                            ? 150.h
-                            : ScreenUtil().orientation ==
-                                        Orientation.portrait &&
-                                    AppServices.getDeviceType() ==
-                                        DeviceType.desktop
-                                ? 100.h
-                                : ScreenUtil().orientation ==
-                                            Orientation.landscape &&
-                                        AppServices.getDeviceType() ==
-                                            DeviceType.phone
-                                    ? 300.h
-                                    : ScreenUtil().orientation ==
-                                                Orientation.landscape &&
-                                            AppServices.getDeviceType() ==
-                                                DeviceType.tablet
-                                        ? 170.h
-                                        : ScreenUtil().orientation ==
-                                                    Orientation.landscape &&
-                                                AppServices.getDeviceType() ==
-                                                    DeviceType.desktop
-                                            ? 400.h
-                                            : 100.h,
-                    decoration: BoxDecoration(
-                      // color: Colors.white,
-                      borderRadius: BorderRadius.circular(100),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(0, 3),
-                          blurRadius: 7.r,
-                          spreadRadius: 5.r,
-                          color: Colors.grey.withOpacity(0.2),
-                        ),
-                      ],
-                    ),
+                    onTap: () async {
+                      log('clicked');
+                      // ImagePick.imagePickerOption();
+                      imagePickerOptionWithReturn();
+                    },
                     child: images != null
-
-                        // ? CircleAvatar(
-                        //     radius: 83,
-                        //     child: Image.file(images!,
-                        //         fit: BoxFit.cover, width: 83, height: 83),
-                        //   )
-
-                        ? ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Image.file(images!,
-                              fit: BoxFit.cover, width: 83, height: 83),
-                        )
-
-                        : const Image(
-                            image: ResizeImage(
-                                AssetImage(
-                                    "assets/images/camera-plus-svgrepo-com.png"),
-                                width: 83,
-                                height: 83)),
-
-                    // child: Image(
-                    //   image: images =! null ? Image.file(images): ResizeImage(
-                    //       AssetImage(
-                    //           'assets/images/camera-plus-svgrepo-com.png'),
-                    //       width: 83,
-                    //       height: 83)
-                    // )
-                  ),
-                ))
+                        ? Container(
+                            width:
+                                ScreenUtil().orientation == Orientation.portrait
+                                    ? 150.w
+                                    : 100.w,
+                            height:
+                                ScreenUtil().orientation == Orientation.portrait
+                                    ? 150.w
+                                    : 100.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(
+                                  color: ColorHelper.secondaryOrangeColor,
+                                  width: 5),
+                            ),
+                            child: ClipRRect(
+                                clipBehavior: Clip.hardEdge,
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(100)),
+                                child: Image.file(
+                                  images!,
+                                  fit: BoxFit.cover,
+                                )))
+                        : Container(
+                            width:
+                                ScreenUtil().orientation == Orientation.portrait
+                                    ? 140.w
+                                    : 100.w,
+                            height:
+                                ScreenUtil().orientation == Orientation.portrait
+                                    ? 140.w
+                                    : 100.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(
+                                  color: ColorHelper.secondaryOrangeColor,
+                                  width: 5),
+                            ),
+                            child: ClipRRect(
+                              clipBehavior: Clip.hardEdge,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(100)),
+                              child: Image.asset(
+                                "assets/images/camera-plus-svgrepo-com.png",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )))
           ],
         ),
       ),

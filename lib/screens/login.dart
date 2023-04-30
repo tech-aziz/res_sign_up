@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/login_custom_container.dart';
 import '../widgets/custom_size.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -12,10 +11,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _companyEmailTextController = TextEditingController();
-  final TextEditingController _companyPasswordTextController = TextEditingController();
+  final TextEditingController _companyEmailTextController =
+      TextEditingController();
+  final TextEditingController _companyPasswordTextController =
+      TextEditingController();
   static final _formKey = GlobalKey<FormState>();
-
 
   @override
   void dispose() {
@@ -32,21 +32,9 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Stack(
           children: [
             Container(
-              // height: 300,
-              // height: ScreenUtil().orientation == Orientation.landscape
-              //     ? AppServices.getDeviceType() == DeviceType.phone
-              //         ? 300.h
-              //         : 500.h
-              //     : 225.h,
-
-              height: CustomSize.customSize(
-                  portPhone: 350.h,
-                  portTablet: 320.h,
-                  portDesktop: 10.h,
-                  landPhone: 560.h,
-                  landTablet: 400.h,
-                  landDestop: 160.h),
-              width: MediaQuery.of(context).size.width,
+              height: ScreenUtil().orientation == Orientation.portrait
+                  ? 300.w
+                  : 150.w, // width is not set yet.
               decoration: BoxDecoration(
                 color: Colors.orange,
                 borderRadius: BorderRadius.only(
@@ -65,19 +53,14 @@ class _LoginScreenState extends State<LoginScreen> {
             Positioned(
               child: SafeArea(
                 child: SizedBox(
-                    height: CustomSize.customSize(
-                        portPhone: 1450.h,
-                        portTablet: 1100.h,
-                        portDesktop: 0.h,
-                        landPhone: 1150.h,
-                        landTablet: 1150.h,
-                        landDestop: 0.h),
+                    height: ScreenUtil().orientation == Orientation.portrait
+                        ? ScreenUtil().screenHeight
+                        : ScreenUtil().screenHeight,
                     child: signInCustomContainer(
                         companyEmailTextController: _companyEmailTextController,
-                        companyPasswordTextController: _companyPasswordTextController,
-
-                        formKey: _formKey
-                        )),
+                        companyPasswordTextController:
+                            _companyPasswordTextController,
+                        formKey: _formKey)),
               ),
             ),
           ],

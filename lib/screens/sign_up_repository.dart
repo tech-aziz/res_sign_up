@@ -5,7 +5,6 @@ import '../database/init_database.dart';
 import '../model/base_response.dart';
 import '../model/sign_up_model.dart';
 
-
 class SignUpRepository {
   Database? _database;
 
@@ -25,23 +24,22 @@ class SignUpRepository {
     try {
       var query = 'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo};';
 
-    var  data = await _database!.rawQuery(query);
+      var data = await _database!.rawQuery(query);
 
       var restaurantList = List<SignUpModel>.empty(growable: true);
       if (data.isNotEmpty) {
         for (int i = 0; i < data.length; i++) {
           var map = {};
           data[i].forEach((key, value) => map[key] = value);
-          restaurantList.add(
-              SignUpModel(
-                  id: map[DatabaseInfo.columnRestaurantId],
-                  restaurantName: map[DatabaseInfo.columnRestaurantName],
-                  restaurantAddress: map[DatabaseInfo.columnRestaurantAddress],
-                  restaurantEmail: map[DatabaseInfo.columnRestaurantEmail],
-                  restaurantMobileNumber:
-                      map[DatabaseInfo.columnRestaurantMobileNumber],
-                  restaurantPassword:
-                      map[DatabaseInfo.columnRestaurantPassword]));
+          restaurantList.add(SignUpModel(
+              id: map[DatabaseInfo.columnRestaurantId],
+              restaurantName: map[DatabaseInfo.columnRestaurantName],
+              restaurantAddress: map[DatabaseInfo.columnRestaurantAddress],
+              restaurantEmail: map[DatabaseInfo.columnRestaurantEmail],
+              restaurantMobileNumber:
+                  map[DatabaseInfo.columnRestaurantMobileNumber],
+              restaurantPassword: map[DatabaseInfo.columnRestaurantPassword],
+              restaurantImage: map[DatabaseInfo.columnImagePath]));
         }
       }
 
