@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
+
 SignUpModel signUpModelFromJson(String str) =>
     SignUpModel.fromMap(json.decode(str));
 
@@ -26,7 +28,7 @@ class SignUpModel {
   String? restaurantMobileNumber;
   String? restaurantEmail;
   String? restaurantPassword;
-  String? restaurantImage;
+  final Uint8List restaurantImage;
 
 //database amader ekta map diye dey ba object dey, database theke data anar jonno fromjson / fromMap method use hoy
   factory SignUpModel.fromMap(Map<String, dynamic> map) => SignUpModel(
