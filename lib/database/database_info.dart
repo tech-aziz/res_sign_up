@@ -10,5 +10,4 @@ class DatabaseInfo {
   static const String columnRestaurantMobileNumber = 'restaurant_mobile_number';
   static const String columnRestaurantEmail = 'restaurant_email';
   static const String columnRestaurantPassword = 'restaurant_password';
-  static const String columnImagePath = 'image_path';
 }

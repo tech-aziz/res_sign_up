@@ -39,7 +39,7 @@ class SignUpRepository {
               restaurantMobileNumber:
                   map[DatabaseInfo.columnRestaurantMobileNumber],
               restaurantPassword: map[DatabaseInfo.columnRestaurantPassword],
-              restaurantImage: map[DatabaseInfo.columnImagePath]));
+    ));
         }
       }
 

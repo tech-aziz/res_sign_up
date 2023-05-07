@@ -19,7 +19,6 @@ class SignUpModel {
     required this.restaurantMobileNumber,
     required this.restaurantEmail,
     required this.restaurantPassword,
-    required this.restaurantImage
   });
 
   int? id;
@@ -28,7 +27,6 @@ class SignUpModel {
   String? restaurantMobileNumber;
   String? restaurantEmail;
   String? restaurantPassword;
-  final Uint8List restaurantImage;
 
 //database amader ekta map diye dey ba object dey, database theke data anar jonno fromjson / fromMap method use hoy
   factory SignUpModel.fromMap(Map<String, dynamic> map) => SignUpModel(
@@ -38,7 +36,6 @@ class SignUpModel {
         restaurantMobileNumber: map["restaurant_mobile_number"],
         restaurantEmail: map["restaurant_email"],
         restaurantPassword: map["restaurant_password"],
-        restaurantImage: map["image_path"]
       );
 
 //databae map ney, model ney nah, toJson() or toMap() hocce database e data pathanor jonno
@@ -49,6 +46,5 @@ class SignUpModel {
         "restaurant_mobile_number": restaurantMobileNumber,
         "restaurant_email": restaurantEmail,
         "restaurant_password": restaurantPassword,
-        "image_path":restaurantImage
       };
 }

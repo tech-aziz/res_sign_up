@@ -13,6 +13,7 @@ import '../utils/color_helper.dart';
 import '../utils/snack_messages.dart';
 import '../widgets/signup_custom_container.dart';
 import '../widgets/custom_size.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -75,7 +76,7 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           InkWell(
                             onTap: () async {
-                              pickImage(ImageSource.camera);
+                              getImage(ImageSource.camera);
                               Get.back();
                             },
                             child: Container(
@@ -109,7 +110,7 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           InkWell(
                             onTap: () async {
-                              pickImage(ImageSource.gallery);
+                              getImage(ImageSource.gallery);
                               Get.back();
                             },
                             child: Container(
@@ -152,7 +153,7 @@ class _SignUpState extends State<SignUp> {
 
 // ei function ta diye to vai may be korte hobe...but kemne bujtecina.// database a image ta upload korar function to likha lagbe vai
 
-  Future pickImage(ImageSource source) async {
+  Future getImage(ImageSource source) async {
     try {
       final image =
           await ImagePicker().pickImage(source: source, imageQuality: 10);
@@ -171,6 +172,7 @@ class _SignUpState extends State<SignUp> {
         //sqflite er update just...apnar kace to just vai amr kace hardly matter...nah parle vai apni ektow dekhai diyen.
 
         setState(() => images = takeImage);
+        // saveImage(images);
       }
     } on PlatformException catch (e) {
       print('Failed to pick image $e');
@@ -346,6 +348,11 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+
+  // void saveImage(path) async {
+  //   SharedPreferences saveImage = await SharedPreferences.getInstance();
+  //   saveImage.setString("image-path", path);
+  // }
 }
 
 //apni image khn upload korte cacche ? create account a click korar time a naki image pick korar por e ?
