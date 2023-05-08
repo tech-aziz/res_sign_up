@@ -6,8 +6,8 @@ import 'package:get_storage/get_storage.dart';
 import 'screens/home_page.dart';
 import 'screens/login.dart';
 
-void main() async {
-  await GetStorage.init();
+Future<void> main() async {
+  await GetStorage.init(); //initialize storage driver
   runApp(const MyApp());
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.orange));
@@ -43,6 +43,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final userData = GetStorage();
 
   @override

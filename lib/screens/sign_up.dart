@@ -1,19 +1,13 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
-import '../utils/snack_messages.dart';
 import '../widgets/signup_custom_container.dart';
-import '../widgets/custom_size.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -37,7 +31,8 @@ class _SignUpState extends State<SignUp> {
       TextEditingController();
   static final _formKey = GlobalKey<FormState>();
 
-  static File? images;
+  // static File? images;
+  var images;
 
   void imagePickerOption() {
     Get.bottomSheet(
@@ -155,12 +150,24 @@ class _SignUpState extends State<SignUp> {
 
   Future getImage(ImageSource source) async {
     try {
-      final image =
+      final XFile? xFile =
           await ImagePicker().pickImage(source: source, imageQuality: 10);
-      if (image == null) {
+
+      // here is the new code implemented
+
+      // if (xFile != null) {
+      //   Uint8List bytes = await xFile.readAsBytes();
+      //   setState(() {
+      //     image = base64Encode(bytes);
+      //   });
+      // }else{
+      //   return;
+      // }
+
+      if (xFile == null) {
         return;
       } else {
-        final takeImage = File(image.path);
+        final takeImage = File(xFile.path);
 
         // Uint8List bytes = await takeImage.readAsBytes();
         // final String value = base64Encode(bytes);
@@ -193,166 +200,139 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        body: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.topCenter,
-          children: [
-            Container(
-              height: ScreenUtil().orientation == Orientation.portrait
-                  ? 300.w
-                  : 150.w, // width is not set yet.
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(25.r),
-                    bottomLeft: Radius.circular(25.r)),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 3),
-                    blurRadius: 7.r,
-                    spreadRadius: 5.r,
-                    color: Colors.grey.withOpacity(0.1),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              child: SizedBox(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          body: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.topCenter,
+            children: [
+              Container(
                 height: ScreenUtil().orientation == Orientation.portrait
-                    ? ScreenUtil().screenHeight
-                    : ScreenUtil().screenHeight,
-                child: signUpCustomContainer(
-                    companyNameTextController: _companyNameTextController,
-                    companyAddressTextController: _companyAddressTextController,
-                    companyEmailTextController: _companyEmailTextController,
-                    companyPhoneTextController: _companyPhoneTextController,
-                    companyPasswordTextController:
-                        _companyPasswordTextController,
-                    companyConfirmPasswordTextController:
-                        _companyConfirmPasswordTextController,
-                    formKey: _formKey),
+                    ? 300.w
+                    : 150.w, // width is not set yet.
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(25.r),
+                      bottomLeft: Radius.circular(25.r)),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 3),
+                      blurRadius: 7.r,
+                      spreadRadius: 5.r,
+                      color: Colors.grey.withOpacity(0.1),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-                // top: 70,
-                top: ScreenUtil().orientation == Orientation.portrait ? 70 : 50,
-                child: images != null
-                    ? Container(
-                        width: ScreenUtil().orientation == Orientation.portrait
-                            ? 150.w
-                            : 100.w,
-                        height: ScreenUtil().orientation == Orientation.portrait
-                            ? 150.w
-                            : 100.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(
-                              color: ColorHelper.secondaryOrangeColor,
-                              width: 5),
-                        ),
-                        child: ClipRRect(
+              Positioned(
+                child: SizedBox(
+                  height: ScreenUtil().orientation == Orientation.portrait
+                      ? ScreenUtil().screenHeight
+                      : ScreenUtil().screenHeight,
+                  child: signUpCustomContainer(
+                      companyNameTextController: _companyNameTextController,
+                      companyAddressTextController:
+                          _companyAddressTextController,
+                      companyEmailTextController: _companyEmailTextController,
+                      companyPhoneTextController: _companyPhoneTextController,
+                      companyPasswordTextController:
+                          _companyPasswordTextController,
+                      companyConfirmPasswordTextController:
+                          _companyConfirmPasswordTextController,
+                      formKey: _formKey),
+                ),
+              ),
+              Positioned(
+                  // top: 70,
+                  top: ScreenUtil().orientation == Orientation.portrait
+                      ? 70
+                      : 50,
+                  child: images != null
+                      ? Container(
+                          width:
+                              ScreenUtil().orientation == Orientation.portrait
+                                  ? 150.w
+                                  : 100.w,
+                          height:
+                              ScreenUtil().orientation == Orientation.portrait
+                                  ? 150.w
+                                  : 100.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(
+                                color: ColorHelper.secondaryOrangeColor,
+                                width: 5),
+                          ),
+                          child: ClipRRect(
+                              clipBehavior: Clip.hardEdge,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(100)),
+                              child: Image.file(
+                                images!,
+                                fit: BoxFit.cover,
+                              )))
+                      : Container(
+                          width:
+                              ScreenUtil().orientation == Orientation.portrait
+                                  ? 140.w
+                                  : 100.w,
+                          height:
+                              ScreenUtil().orientation == Orientation.portrait
+                                  ? 140.w
+                                  : 100.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(
+                                color: ColorHelper.secondaryOrangeColor,
+                                width: 5),
+                          ),
+                          child: ClipRRect(
                             clipBehavior: Clip.hardEdge,
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(100)),
-                            child: Image.file(
-                              images!,
+                            child: Image.asset(
+                              "assets/images/camera-plus-svgrepo-com.png",
                               fit: BoxFit.cover,
-                            )))
-                    : Container(
-                        width: ScreenUtil().orientation == Orientation.portrait
-                            ? 140.w
-                            : 100.w,
-                        height: ScreenUtil().orientation == Orientation.portrait
-                            ? 140.w
-                            : 100.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(
-                              color: ColorHelper.secondaryOrangeColor,
-                              width: 5),
-                        ),
-                        child: ClipRRect(
-                          clipBehavior: Clip.hardEdge,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(100)),
-                          child: Image.asset(
-                            "assets/images/camera-plus-svgrepo-com.png",
-                            fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                      )),
-
-            Positioned(
-                top: 125.h,
-                // top: -200.h,
-                left: ScreenUtil().orientation == Orientation.portrait
-                    ? 430.w
-                    : 415.w,
-                child: InkWell(
-                  onTap: () {
-                    imagePickerOption();
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      color: ColorHelper.secondaryOrangeColor,
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(
-                          width: 2, color: ColorHelper.secondaryOrangeColor),
+                        )),
+              Positioned(
+                  top: 125.h,
+                  // top: -200.h,
+                  left: ScreenUtil().orientation == Orientation.portrait
+                      ? 430.w
+                      : 415.w,
+                  child: InkWell(
+                    onTap: () {
+                      imagePickerOption();
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        color: ColorHelper.secondaryOrangeColor,
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                            width: 2, color: ColorHelper.secondaryOrangeColor),
+                      ),
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.edit,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                )),
+                  )),
+            ],
+          ),
+        ));
+    // }
 
-            // Positioned(
-            //   top: 10.h,
-            //   left: ScreenUtil().orientation == Orientation.portrait
-            //       ? 105.w
-            //       : 72.w,
-            //   child: Column(
-            //     children: [
-            //       InkWell(
-            //         onTap: () {
-            //           // ImagePick().imagePickerOption(fromRestaurantInfo: true);
-            //           // _settingsController.pickImage(false);
-            //         },
-            //         child: Container(
-            //           padding: const EdgeInsets.all(2),
-            //           height: 30,
-            //           width: 30,
-            //           decoration: BoxDecoration(
-            //             color: ColorHelper.secondaryOrangeColor,
-            //             borderRadius: BorderRadius.circular(50),
-            //             border: Border.all(
-            //                 width: 2, color: ColorHelper.secondaryOrangeColor),
-            //           ),
-            //           child: const Icon(
-            //             Icons.edit,
-            //             color: Colors.white,
-            //             size: 20,
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // )
-          ],
-        ),
-      ),
-    );
+// void saveImage(path) async {
+//   SharedPreferences saveImage = await SharedPreferences.getInstance();
+//   saveImage.setString("image-path", path);
+// }
   }
-
-  // void saveImage(path) async {
-  //   SharedPreferences saveImage = await SharedPreferences.getInstance();
-  //   saveImage.setString("image-path", path);
-  // }
 }
 
 //apni image khn upload korte cacche ? create account a click korar time a naki image pick korar por e ?

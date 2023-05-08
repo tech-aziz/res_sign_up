@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +21,6 @@ Widget signUpCustomContainer({
   required GlobalKey<FormState> formKey,
 }) {
   SignUpRepository signUp = SignUpRepository();
-  String name, address, phone, email, password, confirmPassword;
   // ImagePick imagePick = ImagePick();
   // var actualImage = ImagePick.seletedImagePath;
 
@@ -97,9 +95,7 @@ Widget signUpCustomContainer({
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                name = value!;
-                              },
+                              onSaved: (value) {},
                               controller: companyNameTextController,
                               keyboardType: TextInputType.name,
                               // maxLength: 30,
@@ -133,9 +129,7 @@ Widget signUpCustomContainer({
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                address = value!;
-                              },
+                              onSaved: (value) {},
                               // maxLength: 160,
                               minLines: 1,
                               maxLines: 2,
@@ -174,9 +168,7 @@ Widget signUpCustomContainer({
                                   return null;
                                 }
                               },
-                              onSaved: (value) {
-                                phone = value!;
-                              },
+                              onSaved: (value) {},
                               // maxLength: 11,
                               decoration: InputDecoration(
                                 labelText: 'Phone Number',
@@ -214,9 +206,7 @@ Widget signUpCustomContainer({
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                email = value!;
-                              },
+                              onSaved: (value) {},
                               decoration: InputDecoration(
                                 labelText: 'Email',
                                 prefixIcon: const Icon(Icons.mail),
@@ -248,9 +238,7 @@ Widget signUpCustomContainer({
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                password = value!;
-                              },
+                              onSaved: (value) {},
                               // maxLength: 50,
                               decoration: InputDecoration(
                                 labelText: 'Password',
@@ -292,9 +280,7 @@ Widget signUpCustomContainer({
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                confirmPassword = value!;
-                              },
+                              onSaved: (value) {},
                               // maxLength: 50,
                               decoration: InputDecoration(
                                 labelText: 'Confirm Password',
@@ -353,7 +339,6 @@ Widget signUpCustomContainer({
                         child: Text(
                           'Create Account',
                           style: Style.largeInputText(),
-                        
                         ),
                       ),
                     ),
