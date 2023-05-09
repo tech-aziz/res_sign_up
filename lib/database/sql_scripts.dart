@@ -7,5 +7,6 @@ class SqlScript{
       '${DatabaseInfo.columnRestaurantAddress} TEXT,'
       '${DatabaseInfo.columnRestaurantMobileNumber} TEXT,'
       '${DatabaseInfo.columnRestaurantEmail} TEXT UNIQUE,'
-      '${DatabaseInfo.columnRestaurantPassword} TEXT,';
+      '${DatabaseInfo.columnRestaurantPassword} TEXT,'
+      '${DatabaseInfo.columnRestaurantImage} TEXT)';
 }

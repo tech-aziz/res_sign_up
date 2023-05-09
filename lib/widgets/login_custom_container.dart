@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../global/styles.dart';
 import '../screens/login_repository.dart';
 import '../screens/sign_up.dart';
@@ -169,7 +172,7 @@ Widget signInCustomContainer(
 
                             signIn.createLogin(
                               companyEmailTextController.text,
-                              companyPasswordTextController.text,
+                              companyPasswordTextController.text
                             );
 
                             FocusManager.instance.primaryFocus?.unfocus();

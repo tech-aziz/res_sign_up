@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import '../widgets/login_custom_container.dart';
 import '../widgets/custom_size.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+
+
+  // XFile ? imageFile;
+   LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -15,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
       TextEditingController();
   final TextEditingController _companyPasswordTextController =
       TextEditingController();
+
   static final _formKey = GlobalKey<FormState>();
 
   @override
@@ -26,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -60,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         companyEmailTextController: _companyEmailTextController,
                         companyPasswordTextController:
                             _companyPasswordTextController,
+
                         formKey: _formKey)),
               ),
             ),

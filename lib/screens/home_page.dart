@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
@@ -8,11 +11,8 @@ class HomePages extends StatefulWidget {
   String? email;
   String? password;
 
-  HomePages({
-    super.key,
-    this.email,
-    this.password,
-  });
+
+  HomePages({super.key, this.email, this.password});
 
   @override
   State<HomePages> createState() => _HomePageState();
@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePages> {
                     Card(
                       elevation: 12,
                       child: ListTile(
+
                         leading: const CircleAvatar(
                           backgroundImage: NetworkImage(
                             'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29uYXxlbnwwfHwwfHw%3D&w=1000&q=80',
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePages> {
                               userData.write('isLogged', false);
                               userData.remove('email');
                               userData.remove('password');
-                              Get.offAll(const LoginScreen());
+                              Get.offAll(LoginScreen());
                             },
                             child: const Icon(Icons.logout_rounded)),
                       ),

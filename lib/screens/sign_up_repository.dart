@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
 import '../database/database_info.dart';
 import '../database/init_database.dart';
@@ -57,6 +60,7 @@ class SignUpRepository {
     String address,
     String email,
     String password,
+      // XFile? imageFile,
   ) async {
     if (_database == null || !_database!.isOpen) {
       _database = await InitDatabase().open();

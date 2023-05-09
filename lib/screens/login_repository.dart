@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,13 +15,13 @@ class LoginRepository {
   Database? _database;
   String companyEmailTextController;
   String companyPasswordTextController;
+
   final userData = GetStorage();
 
-  LoginRepository({
-    initDatabase,
-    required this.companyEmailTextController,
-    required this.companyPasswordTextController,
-  });
+  LoginRepository(
+      {initDatabase,
+      required this.companyEmailTextController,
+      required this.companyPasswordTextController,});
 
   void initDatabase() async {
     _database = await InitDatabase().open();
@@ -42,13 +45,17 @@ class LoginRepository {
           'SELECT * FROM ${DatabaseInfo.tableRestaurantInfo} WHERE ${DatabaseInfo.columnRestaurantEmail}=? and ${DatabaseInfo.columnRestaurantPassword}=?',
           [email, password]);
 
-      if (result.isNotEmpty & email.isNotEmpty & password.isNotEmpty) {
+      if (result.isNotEmpty &
+          email.isNotEmpty &
+          password.isNotEmpty
+          ) {
         print('Sign in successfully done');
         SnackMessage.showSuccess('Sign in successfully done');
 
         userData.write('isLogged', true);
         userData.write('email', email);
         userData.write('password', password);
+
         Get.off(() => homePage());
       } else {
         print('Log in failed');
@@ -66,6 +73,7 @@ class LoginRepository {
     return HomePages(
       email: companyEmailTextController.toString(),
       password: companyPasswordTextController.toString(),
+
     );
   }
 }

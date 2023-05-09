@@ -43,7 +43,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final userData = GetStorage();
 
   @override
@@ -70,6 +69,6 @@ class _HomePageState extends State<HomePage> {
   void checkIfLogged() {
     userData.read('isLogged')
         ? Get.offAll(HomePages())
-        : Get.offAll(const LoginScreen());
+        : Get.offAll(LoginScreen());
   }
 }

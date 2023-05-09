@@ -5,12 +5,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:res_sign_up/database/database_info.dart';
+import 'package:res_sign_up/database/init_database.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
 import '../widgets/signup_custom_container.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'sign_up_repository.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -34,8 +38,36 @@ class _SignUpState extends State<SignUp> {
       TextEditingController();
   static final _formKey = GlobalKey<FormState>();
 
-  // static File? images;
-  var images;
+  static File? images;
+  // var images
+
+
+  /*second function for getting image*/
+  // var imageFile;
+  // var uploadImage;
+  // final picker = ImagePicker();
+  // Future<void> _getImage(ImageSource source) async {
+  //   final XFile? xFile = await picker.pickImage(source: source);
+  //   imageFile = xFile!.path.split('/').last;
+  //   Uint8List bytes = await xFile.readAsBytes();
+  //   uploadImage = base64Encode(bytes);
+  //   setState(() {
+  //     imageFile = File(uploadImage!.path);
+  //   });
+  //
+  //   final database = await InitDatabase().open();
+  //   await database.insert(
+  //     DatabaseInfo.tableRestaurantInfo,
+  //     {DatabaseInfo.columnRestaurantImage: imageFile!.path},
+  //     conflictAlgorithm: ConflictAlgorithm.replace,
+  //   );
+  //
+  //   if (imageFile != null) {
+  //     Image.file(imageFile! as File);
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   void imagePickerOption() {
     Get.bottomSheet(
@@ -75,6 +107,7 @@ class _SignUpState extends State<SignUp> {
                           InkWell(
                             onTap: () async {
                               getImage(ImageSource.camera);
+                              // _getImage(ImageSource.camera);
                               Get.back();
                             },
                             child: Container(
@@ -109,6 +142,7 @@ class _SignUpState extends State<SignUp> {
                           InkWell(
                             onTap: () async {
                               getImage(ImageSource.gallery);
+                              // _getImage(ImageSource.gallery);
                               Get.back();
                             },
                             child: Container(
@@ -243,6 +277,7 @@ class _SignUpState extends State<SignUp> {
                           _companyPasswordTextController,
                       companyConfirmPasswordTextController:
                           _companyConfirmPasswordTextController,
+                      // imageFile: imageFile,
                       formKey: _formKey),
                 ),
               ),

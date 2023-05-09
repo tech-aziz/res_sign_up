@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +21,7 @@ Widget signUpCustomContainer({
   required TextEditingController companyEmailTextController,
   required TextEditingController companyPasswordTextController,
   required TextEditingController companyConfirmPasswordTextController,
+  // required XFile ? imageFile,
   required GlobalKey<FormState> formKey,
 }) {
   SignUpRepository signUp = SignUpRepository();
@@ -316,10 +320,12 @@ Widget signUpCustomContainer({
                                 companyPhoneTextController.text,
                                 companyAddressTextController.text,
                                 companyEmailTextController.text,
-                                companyPasswordTextController.text);
+                                companyPasswordTextController.text,
+                              // imageFile
+                            );
                             print('sign up successfully done');
                             SnackMessage.showSuccess('Sign up successfully!');
-                            Get.to(() => const LoginScreen());
+                            Get.to(() =>  LoginScreen());
                             FocusManager.instance.primaryFocus?.unfocus();
 
                             //clear filed
@@ -364,7 +370,7 @@ Widget signUpCustomContainer({
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         print('Login Text Clicked');
-                                        Get.to(() => const LoginScreen());
+                                        Get.to(() => LoginScreen());
                                       }),
                               ],
                             ),
