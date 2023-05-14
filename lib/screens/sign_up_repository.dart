@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
 import '../database/database_info.dart';
@@ -35,14 +37,14 @@ class SignUpRepository {
           var map = {};
           data[i].forEach((key, value) => map[key] = value);
           restaurantList.add(SignUpModel(
-              id: map[DatabaseInfo.columnRestaurantId],
-              restaurantName: map[DatabaseInfo.columnRestaurantName],
-              restaurantAddress: map[DatabaseInfo.columnRestaurantAddress],
-              restaurantEmail: map[DatabaseInfo.columnRestaurantEmail],
-              restaurantMobileNumber:
-                  map[DatabaseInfo.columnRestaurantMobileNumber],
-              restaurantPassword: map[DatabaseInfo.columnRestaurantPassword],
-    ));
+            id: map[DatabaseInfo.columnRestaurantId],
+            restaurantName: map[DatabaseInfo.columnRestaurantName],
+            restaurantAddress: map[DatabaseInfo.columnRestaurantAddress],
+            restaurantEmail: map[DatabaseInfo.columnRestaurantEmail],
+            restaurantMobileNumber:
+                map[DatabaseInfo.columnRestaurantMobileNumber],
+            restaurantPassword: map[DatabaseInfo.columnRestaurantPassword],
+          ));
         }
       }
 
@@ -60,8 +62,10 @@ class SignUpRepository {
     String address,
     String email,
     String password,
-      // XFile? imageFile,
+    // Uint8List image,
   ) async {
+    // log('image from repo : ' + image.toString());
+
     if (_database == null || !_database!.isOpen) {
       _database = await InitDatabase().open();
     }

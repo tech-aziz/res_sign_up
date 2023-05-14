@@ -8,19 +8,19 @@ import 'package:image_picker/image_picker.dart';
 import '../global/styles.dart';
 import '../screens/login_repository.dart';
 import '../screens/sign_up.dart';
+import '../screens/sign_up_copy.dart';
 import '../utils/app_services.dart';
 import '../utils/color_helper.dart';
 import 'custom_size.dart';
 
-Widget signInCustomContainer(
-    {required TextEditingController companyEmailTextController,
-    required TextEditingController companyPasswordTextController,
-    required GlobalKey<FormState> formKey,
-    }) {
+Widget signInCustomContainer({
+  required TextEditingController companyEmailTextController,
+  required TextEditingController companyPasswordTextController,
+  required GlobalKey<FormState> formKey,
+}) {
   LoginRepository signIn = LoginRepository(
-      companyEmailTextController: companyEmailTextController.text,
-      companyPasswordTextController: companyPasswordTextController.text,
-
+    companyEmailTextController: companyEmailTextController.text,
+    companyPasswordTextController: companyPasswordTextController.text,
   );
   String email, password;
 
@@ -69,159 +69,146 @@ Widget signInCustomContainer(
                 parent: AlwaysScrollableScrollPhysics()),
             child: Form(
               key: formKey,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: CustomSize.customSize(
-                        portPhone: 60.h,
-                        portTablet: 95.h,
-                        portDesktop: 0.h,
-                        landPhone: 125.h,
-                        landTablet: 81.h,
-                        landDestop: 160.h)),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: TextFormField(
-                              controller: companyEmailTextController,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please Enter a email';
-                                }
-                                if (!RegExp(
-                                        "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                    .hasMatch(value)) {
-                                  return 'Please Enter a valid Email';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) {
-                                email = value!;
-                              },
-                              // maxLength: 50,
-                              decoration: InputDecoration(
-                                labelText: 'Email',
-                                prefixIcon: const Icon(Icons.mail),
-                                // enabledBorder: OutlineInputBorder(),
-                                enabledBorder: Style.inputBorder(),
-                                focusedBorder: Style.focusBorder(),
-                              ),
-                              style: Style.largeInputText(),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextFormField(
+                            controller: companyEmailTextController,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please Enter a email';
+                              }
+                              if (!RegExp(
+                                      "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                  .hasMatch(value)) {
+                                return 'Please Enter a valid Email';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              email = value!;
+                            },
+                            // maxLength: 50,
+                            decoration: InputDecoration(
+                              labelText: 'Email',
+                              prefixIcon: const Icon(Icons.mail),
+                              // enabledBorder: OutlineInputBorder(),
+                              enabledBorder: Style.inputBorder(),
+                              focusedBorder: Style.focusBorder(),
                             ),
+                            style: Style.largeInputText(),
                           ),
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: TextFormField(
-                              controller: companyPasswordTextController,
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText: true,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please Enter a Password';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) {
-                                password = value!;
-                              },
-                              // maxLength: 50,
-                              decoration: InputDecoration(
-                                labelText: 'Password',
-                                prefixIcon: const Icon(Icons.lock),
-                                enabledBorder: Style.inputBorder(),
-                                focusedBorder: Style.focusBorder(),
-                              ),
-                              style: Style.largeInputText(),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextFormField(
+                            controller: companyPasswordTextController,
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: true,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please Enter a Password';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              password = value!;
+                            },
+                            // maxLength: 50,
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              prefixIcon: const Icon(Icons.lock),
+                              enabledBorder: Style.inputBorder(),
+                              focusedBorder: Style.focusBorder(),
                             ),
+                            style: Style.largeInputText(),
                           ),
                         ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  SizedBox(
+                    height: ScreenUtil().orientation == Orientation.landscape
+                        ? AppServices.getDeviceType() == DeviceType.phone
+                            ? 40
+                            : 78.h
+                        : 60.h,
+                    width: ScreenUtil().orientation == Orientation.landscape
+                        ? 750.w
+                        : 665.w,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorHelper.secondaryOrangeColor),
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          signIn.createLogin(companyEmailTextController.text,
+                              companyPasswordTextController.text);
+
+                          FocusManager.instance.primaryFocus?.unfocus();
+
+                          //clear filed
+                          companyEmailTextController.clear();
+                          companyPasswordTextController.clear();
+                        }
+                      },
+                      child: Text(
+                        'Sign in',
+                        style: Style.largeInputText(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: 'Have\'t an account?',
+                                  style: Style.largeInputText()),
+                              TextSpan(
+                                  text: ' Sign up',
+                                  style: const TextStyle(
+                                      color: Colors.amber,
+                                      fontWeight: FontWeight.bold),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                       Get.to(SignUp());
+                                    }),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    SizedBox(
-                      height: ScreenUtil().orientation == Orientation.landscape
-                          ? AppServices.getDeviceType() == DeviceType.phone
-                              ? 40
-                              : 78.h
-                          : 60.h,
-                      width: ScreenUtil().orientation == Orientation.landscape
-                          ? 750.w
-                          : 665.w,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorHelper.secondaryOrangeColor),
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-
-                            signIn.createLogin(
-                              companyEmailTextController.text,
-                              companyPasswordTextController.text
-                            );
-
-                            FocusManager.instance.primaryFocus?.unfocus();
-
-                            //clear filed
-                            companyEmailTextController.clear();
-                            companyPasswordTextController.clear();
-                          }
-                        },
-                        child: Text(
-                          'Sign in',
-                          style: Style.largeInputText(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                    text: 'Have\'t an account?',
-                                    style: Style.largeInputText()),
-                                TextSpan(
-                                    text: ' Sign up',
-                                    style: const TextStyle(
-                                        color: Colors.amber,
-                                        fontWeight: FontWeight.bold),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Get.to(const SignUp());
-                                      }),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                ],
               ),
             ),
           ),

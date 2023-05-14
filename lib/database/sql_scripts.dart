@@ -8,5 +8,5 @@ class SqlScript{
       '${DatabaseInfo.columnRestaurantMobileNumber} TEXT,'
       '${DatabaseInfo.columnRestaurantEmail} TEXT UNIQUE,'
       '${DatabaseInfo.columnRestaurantPassword} TEXT,'
-      '${DatabaseInfo.columnRestaurantImage} TEXT)';
+      '${DatabaseInfo.columnRestaurantImage} LONGBLOB)';
 }

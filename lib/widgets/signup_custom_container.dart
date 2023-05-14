@@ -21,7 +21,7 @@ Widget signUpCustomContainer({
   required TextEditingController companyEmailTextController,
   required TextEditingController companyPasswordTextController,
   required TextEditingController companyConfirmPasswordTextController,
-  // required XFile ? imageFile,
+  // required Uint8List image,
   required GlobalKey<FormState> formKey,
 }) {
   SignUpRepository signUp = SignUpRepository();
@@ -47,7 +47,7 @@ Widget signUpCustomContainer({
           : 20.h,
       top: ScreenUtil().orientation == Orientation.portrait
           ? AppServices.getDeviceType() == DeviceType.phone
-              ? 170.h
+              ? 110.h
               : 220.h
           : 300.h,
     ),
@@ -321,6 +321,7 @@ Widget signUpCustomContainer({
                                 companyAddressTextController.text,
                                 companyEmailTextController.text,
                                 companyPasswordTextController.text,
+
                               // imageFile
                             );
                             print('sign up successfully done');

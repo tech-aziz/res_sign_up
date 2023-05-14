@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
+import '../settings/settings_controller.dart';
+import '../utils/constants.dart';
 import 'login.dart';
 
 class HomePages extends StatefulWidget {
@@ -20,6 +22,8 @@ class HomePages extends StatefulWidget {
 
 class _HomePageState extends State<HomePages> {
   final userData = GetStorage();
+  final SettingsController _settingsController = Get.put(SettingsController());
+  
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +50,8 @@ class _HomePageState extends State<HomePages> {
                       elevation: 12,
                       child: ListTile(
 
-                        leading: const CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29uYXxlbnwwfHwwfHw%3D&w=1000&q=80',
-                          ),
+                        leading:  Obx(() => CircleAvatar(
+                            backgroundImage: NetworkImage(_settingsController.imageString.toString())),
                         ),
                         title: Text("Email: ${userData.read('email')}",
                             style: const TextStyle(

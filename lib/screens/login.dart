@@ -8,7 +8,6 @@ import '../widgets/custom_size.dart';
 
 class LoginScreen extends StatefulWidget {
 
-
   // XFile ? imageFile;
    LoginScreen({super.key});
 
@@ -17,10 +16,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _companyEmailTextController =
-      TextEditingController();
-  final TextEditingController _companyPasswordTextController =
-      TextEditingController();
+  final TextEditingController _companyEmailTextController =  TextEditingController();
+  final TextEditingController _companyPasswordTextController = TextEditingController();
 
   static final _formKey = GlobalKey<FormState>();
 
@@ -66,9 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         : ScreenUtil().screenHeight,
                     child: signInCustomContainer(
                         companyEmailTextController: _companyEmailTextController,
-                        companyPasswordTextController:
-                            _companyPasswordTextController,
-
+                        companyPasswordTextController: _companyPasswordTextController,
                         formKey: _formKey)),
               ),
             ),
