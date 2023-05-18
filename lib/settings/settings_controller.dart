@@ -11,8 +11,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../utils/app_storage.dart';
 import '../utils/snack_messages.dart';
 
-class SettingsController extends GetxController{
-
+class SettingsController extends GetxController {
   var hasImage = false.obs;
   var imageString = "".obs;
   var uploadImageString = ''.obs;
@@ -22,7 +21,11 @@ class SettingsController extends GetxController{
 
   late AppStorage appStorage;
 
-
+  @override
+  void onInit() async {
+    appStorage = AppStorage();
+    super.onInit();
+  }
 
   Uint8List getImageBytes() {
     return base64Decode(imageString.value);
@@ -30,7 +33,7 @@ class SettingsController extends GetxController{
 
   void pickImage({
     required bool fromCamera,
-    bool fromRestaurantInfo = true,
+    bool fromRestaurantInfo = false,
     // var fromLeftItem,
     // var selectedItem,
   }) async {
@@ -90,12 +93,11 @@ class SettingsController extends GetxController{
         //   }
         // }
         hasImage.value = true;
-        // debugPrint("ImageString" + imageString.value);
+        debugPrint("ImageString${imageString.value}");
       } else {
         hasImage.value = false;
         SnackMessage.showError("No Image Found");
       }
     }
   }
-
 }

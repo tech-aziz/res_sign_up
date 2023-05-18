@@ -134,7 +134,7 @@ class ImagePick {
   //apni image database a update koren r akn ami ei kaj korte parbo na karon ei project a akjer cap akn
   //sesh kora lagbe project...thik ace thole vai....ami image tai database e store korte parchi nah....hmm ok vai
 
-  void cameraImagePicker(fromRestaurantInfo) async {
+  void cameraImagePicker(bool fromRestaurantInfo) async {
     List len = await availableCameras();
     if (len.isEmpty) {
       SnackMessage.showError('Your device does not support camera service');

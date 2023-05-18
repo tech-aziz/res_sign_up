@@ -19,14 +19,14 @@ import 'package:sqflite/sqflite.dart';
 
 import 'sign_up_repository.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignUpCopy extends StatefulWidget {
+  const SignUpCopy({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpCopy> createState() => _SignUpCopyState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpCopyState extends State<SignUpCopy> {
   final TextEditingController _companyNameTextController =
       TextEditingController();
   final TextEditingController _companyAddressTextController =
@@ -256,7 +256,7 @@ class _SignUpState extends State<SignUp> {
                         //bro...image e click korle add hocce but store hoye thaktece nah and homepage e dekhate partecina... ekhan theke code ta ektow dekhen.
                         //image ki database a save hoise ?na vai...
                         // vai image to age database rakhte hobe..ami j image ta pacchi oita to database e store korte partechi nah...
-                            () => _settingsController.imageString.isNotEmpty
+                            () => _settingsController.hasImage.value
                             ? Container(
                                 width: ScreenUtil().orientation ==
                                         Orientation.portrait
