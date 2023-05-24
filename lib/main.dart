@@ -9,8 +9,11 @@ import 'screens/login.dart';
 Future<void> main() async {
   await GetStorage.init(); //initialize storage driver
   runApp(const MyApp());
+  // SystemChrome.setSystemUIOverlayStyle(
+  //     const SystemUiOverlayStyle(statusBarColor: Colors.orange));
+
   SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.orange));
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,8 +28,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Sign Up',
           theme: ThemeData(
-            primarySwatch: Colors.orange,
-          ),
+              // primarySwatch: Colors.orange,
+
+              ),
           home: const HomePage(),
         );
       },

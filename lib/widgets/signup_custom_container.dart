@@ -58,7 +58,8 @@ Widget signUpCustomContainer({
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            // color: Colors.white,
+            color: Colors.transparent,
             borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(
@@ -312,7 +313,9 @@ Widget signUpCustomContainer({
                           : 665.w,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorHelper.secondaryOrangeColor),
+                            // backgroundColor: ColorHelper.secondaryOrangeColor
+                          backgroundColor: Colors.transparent
+                        ),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             signUp.createRestaurant(

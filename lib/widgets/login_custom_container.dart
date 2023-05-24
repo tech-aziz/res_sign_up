@@ -53,7 +53,8 @@ Widget signInCustomContainer({
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.transparent,
+            // color: Colors.white,
             borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(

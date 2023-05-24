@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/color_helper.dart';
 
-class Style{
+class Style {
   static OutlineInputBorder inputBorder() {
     //return type is OutlineInputBorder
     return const OutlineInputBorder(
         //Outline border type for TextFeild
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
-          color: Colors.black54,
+          color: Colors.white54,
           width: 1,
         ));
   }
 
-  
   static OutlineInputBorder focusBorder() {
     return const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -30,7 +29,7 @@ class Style{
         fontSize:
             ScreenUtil().orientation == Orientation.portrait ? 25.sp : 15.sp,
         color: Colors.black,
+        // color: Colors.white,
         fontWeight: FontWeight.bold);
   }
-
 }

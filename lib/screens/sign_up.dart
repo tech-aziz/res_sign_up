@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -262,130 +263,138 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          body: Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.topCenter,
-            children: [
-              Container(
-                height: ScreenUtil().orientation == Orientation.portrait
-                    ? 300.w
-                    : 150.w, // width is not set yet.
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(25.r),
-                      bottomLeft: Radius.circular(25.r)),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: const Offset(0, 3),
-                      blurRadius: 7.r,
-                      spreadRadius: 5.r,
-                      color: Colors.grey.withOpacity(0.1),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                child: SizedBox(
+        child: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/bg.JPG'), fit: BoxFit.fill)),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.topCenter,
+              children: [
+                Container(
                   height: ScreenUtil().orientation == Orientation.portrait
-                      ? ScreenUtil().screenHeight
-                      : ScreenUtil().screenHeight,
-                  child: signUpCustomContainer(
-                      companyNameTextController: _companyNameTextController,
-                      companyAddressTextController:
-                          _companyAddressTextController,
-                      companyEmailTextController: _companyEmailTextController,
-                      companyPhoneTextController: _companyPhoneTextController,
-                      companyPasswordTextController:
-                          _companyPasswordTextController,
-                      companyConfirmPasswordTextController:
-                          _companyConfirmPasswordTextController,
-                      // imageFile: imageFile,
-                      formKey: _formKey),
+                      ? 300.w
+                      : 150.w, // width is not set yet.
+                  decoration: BoxDecoration(
+                    // color: Colors.orange,
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(25.r),
+                        bottomLeft: Radius.circular(25.r)),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 3),
+                        blurRadius: 7.r,
+                        spreadRadius: 5.r,
+                        color: Colors.grey.withOpacity(0.1),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Positioned(
-                  // top: 70,
-                  top: ScreenUtil().orientation == Orientation.portrait
-                      ? 70
-                      : 50,
-                  child: images != null
-                      ? Container(
-                          width:
-                              ScreenUtil().orientation == Orientation.portrait
-                                  ? 150.w
-                                  : 100.w,
-                          height:
-                              ScreenUtil().orientation == Orientation.portrait
-                                  ? 150.w
-                                  : 100.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(
-                                color: ColorHelper.secondaryOrangeColor,
-                                width: 5),
-                          ),
-                          child: ClipRRect(
+                Positioned(
+                  child: SizedBox(
+                    height: ScreenUtil().orientation == Orientation.portrait
+                        ? ScreenUtil().screenHeight
+                        : ScreenUtil().screenHeight,
+                    child: signUpCustomContainer(
+                        companyNameTextController: _companyNameTextController,
+                        companyAddressTextController:
+                            _companyAddressTextController,
+                        companyEmailTextController: _companyEmailTextController,
+                        companyPhoneTextController: _companyPhoneTextController,
+                        companyPasswordTextController:
+                            _companyPasswordTextController,
+                        companyConfirmPasswordTextController:
+                            _companyConfirmPasswordTextController,
+                        // imageFile: imageFile,
+                        formKey: _formKey),
+                  ),
+                ),
+                Positioned(
+                    // top: 70,
+                    top: ScreenUtil().orientation == Orientation.portrait
+                        ? 70
+                        : 50,
+                    child: images != null
+                        ? Container(
+                            width:
+                                ScreenUtil().orientation == Orientation.portrait
+                                    ? 150.w
+                                    : 100.w,
+                            height:
+                                ScreenUtil().orientation == Orientation.portrait
+                                    ? 150.w
+                                    : 100.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(
+                                  color: ColorHelper.secondaryOrangeColor,
+                                  width: 5),
+                            ),
+                            child: ClipRRect(
+                                clipBehavior: Clip.hardEdge,
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(100)),
+                                child: Image.file(
+                                  images!,
+                                  fit: BoxFit.cover,
+                                )))
+                        : Container(
+                            width:
+                                ScreenUtil().orientation == Orientation.portrait
+                                    ? 140.w
+                                    : 100.w,
+                            height:
+                                ScreenUtil().orientation == Orientation.portrait
+                                    ? 140.w
+                                    : 100.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(
+                                  color: ColorHelper.secondaryOrangeColor,
+                                  width: 5),
+                            ),
+                            child: ClipRRect(
                               clipBehavior: Clip.hardEdge,
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(100)),
-                              child: Image.file(
-                                images!,
+                              child: Image.asset(
+                                "assets/images/camera-plus-svgrepo-com.png",
                                 fit: BoxFit.cover,
-                              )))
-                      : Container(
-                          width:
-                              ScreenUtil().orientation == Orientation.portrait
-                                  ? 140.w
-                                  : 100.w,
-                          height:
-                              ScreenUtil().orientation == Orientation.portrait
-                                  ? 140.w
-                                  : 100.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(
-                                color: ColorHelper.secondaryOrangeColor,
-                                width: 5),
-                          ),
-                          child: ClipRRect(
-                            clipBehavior: Clip.hardEdge,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(100)),
-                            child: Image.asset(
-                              "assets/images/camera-plus-svgrepo-com.png",
-                              fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        )),
-              Positioned(
-                  top: 125.h,
-                  // top: -200.h,
-                  left: ScreenUtil().orientation == Orientation.portrait
-                      ? 430.w
-                      : 415.w,
-                  child: InkWell(
-                    onTap: () {
-                      imagePickerOption();
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        color: ColorHelper.secondaryOrangeColor,
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                            width: 2, color: ColorHelper.secondaryOrangeColor),
+                          )),
+                Positioned(
+                    top: 125.h,
+                    // top: -200.h,
+                    left: ScreenUtil().orientation == Orientation.portrait
+                        ? 430.w
+                        : 415.w,
+                    child: InkWell(
+                      onTap: () {
+                        imagePickerOption();
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          color: ColorHelper.secondaryOrangeColor,
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(
+                              width: 2,
+                              color: ColorHelper.secondaryOrangeColor),
+                        ),
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ),
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                  )),
-            ],
+                    )),
+              ],
+            ),
           ),
         ));
     // }

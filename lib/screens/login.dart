@@ -33,41 +33,48 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Container(
-              height: ScreenUtil().orientation == Orientation.portrait
-                  ? 300.w
-                  : 150.w, // width is not set yet.
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(25.r),
-                    bottomLeft: Radius.circular(25.r)),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 3),
-                    blurRadius: 7.r,
-                    spreadRadius: 5.r,
-                    color: Colors.grey.withOpacity(0.1),
-                  ),
-                ],
+      child: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/bg.JPG'), fit: BoxFit.fill)),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Stack(
+            children: [
+              Container(
+                height: ScreenUtil().orientation == Orientation.portrait
+                    ? 300.w
+                    : 150.w, // width is not set yet.
+                decoration: BoxDecoration(
+                  // color: Colors.orange,
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(25.r),
+                      bottomLeft: Radius.circular(25.r)),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 3),
+                      blurRadius: 7.r,
+                      spreadRadius: 5.r,
+                      color: Colors.grey.withOpacity(0.1),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-              child: SafeArea(
-                child: SizedBox(
-                    height: ScreenUtil().orientation == Orientation.portrait
-                        ? ScreenUtil().screenHeight
-                        : ScreenUtil().screenHeight,
-                    child: signInCustomContainer(
-                        companyEmailTextController: _companyEmailTextController,
-                        companyPasswordTextController: _companyPasswordTextController,
-                        formKey: _formKey)),
+              Positioned(
+                child: SafeArea(
+                  child: SizedBox(
+                      height: ScreenUtil().orientation == Orientation.portrait
+                          ? ScreenUtil().screenHeight
+                          : ScreenUtil().screenHeight,
+                      child: signInCustomContainer(
+                          companyEmailTextController: _companyEmailTextController,
+                          companyPasswordTextController: _companyPasswordTextController,
+                          formKey: _formKey)),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
